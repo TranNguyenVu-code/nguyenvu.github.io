@@ -1,51 +1,15 @@
-# Performance Test Instructions
+# Performance Test Instructions — Student Analytics Portfolio
 
-## Purpose
+## Applicable scope
 
-Track build output and browser-delivery risks appropriate to a static GitHub Pages portfolio. Server load, throughput, concurrent-user, and API stress testing are not applicable because the project has no application server or API.
-
-## Performance Requirements
-
-- The production build must complete successfully.
-- Decorative theme work must not add a large external download or materially regress startup size.
-- The built entry page and assets must be servable from the local production preview.
-- Background decoration must remain CSS-based, pointer-inert, and free of scroll-linked processing.
-
-## Execute the Static Performance Check
+This static portfolio has no API, database, runtime server, or approved requests-per-second/concurrent-user target. Load/stress/scalability tests are N/A. Performance verification here records static delivery size and responsive usability, without inventing response-time thresholds or a Lighthouse score.
 
 ```bash
 npm run build
 ```
 
-Record the JavaScript and CSS sizes printed by Vite and compare them with the current baseline.
+Read Vite's output for minified and gzip sizes and inspect dist. The verified root build produced JS 701.32 kB (202.75 kB gzip), CSS 34.31 kB (7.58 kB gzip), and a 12.29 kB resume. dist was approximately 748 KiB. Vite transformation/bundling took 3.21 seconds in that run; this excludes the preceding TypeScript phase and is not a benchmark objective.
 
-## Verified Baseline
+No pre-change build was measured, so do not infer a percentage improvement from historic workflows. The over-500-kB JS warning remains non-blocking. Existing runtime/UI dependencies are retained; no code-splitting change is required by this approved revamp.
 
-| Measure          | Observed result                                            |
-| ---------------- | ---------------------------------------------------------- |
-| Vite build time  | Approximately 6.00 seconds on the verification machine     |
-| Main JavaScript  | 975.76 kB minified; 296.49 kB gzip                         |
-| Main CSS         | 34.61 kB minified; 7.43 kB gzip                            |
-| Complete `dist/` | Approximately 9.4 MB including images and PDF certificates |
-| Preview response | HTTP 200 for `/` on the local Vite production preview      |
-
-The main JavaScript remains above Vite's 500 kB warning threshold. This is a tracked, non-blocking warning; the current bundle is smaller than the previous recorded baseline.
-
-## Optional Browser Measurement
-
-For a future performance-focused change, run Lighthouse against `npm run preview` and record mobile performance, accessibility, and largest-contentful-paint results on the same machine and network profile. No Lighthouse threshold is claimed for this change because a controlled browser performance run was not part of the approved scope.
-
-## Optimization Candidates if the Baseline Regresses
-
-1. Split theme code with dynamic imports.
-2. Compress the largest local images.
-3. Review whether all PDFs must ship in the initial static artifact.
-4. Lazy-load media below the fold.
-5. Rebuild and compare the same Vite output fields.
-
-## Not Applicable
-
-- Server response-time objectives under load.
-- Requests per second or concurrent-user targets.
-- API, database, queue, or cache throughput.
-- Stress testing or autoscaling validation.
+For later performance work, preview the production bundle and record mobile Lighthouse/Web Vitals on a controlled machine/network before and after changes. That measurement is optional and was not executed or assigned a pass/fail score here. Source-backed visuals use inline SVG/CSS rather than additional raster/charting libraries. Google font fallbacks permit local rendering when the network is unavailable.

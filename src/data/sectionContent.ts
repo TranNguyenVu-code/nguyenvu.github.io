@@ -1,78 +1,62 @@
 import type { SectionContent } from "../types/portfolio";
 
-// Students can edit section headings and introductions here without changing components.
 export const sectionContent = {
   about: {
-    eyebrow: "ABOUT_PROTOCOL",
-    title: "About Me",
+    eyebrow: "THE PERSON BEHIND THE ANALYSIS",
+    title: "Science is my starting point.",
     description:
-      "I build robust data pipelines, meaningful educational products and lasting connections with others in hope of creating a more caring-through-sharing world.",
+      "Biology taught me to ask questions. Mathematics and data are helping me find new ways to answer them.",
   },
   education: {
-    eyebrow: "EDU_TIMELINE",
-    title: "Education",
+    eyebrow: "ACADEMIC FOUNDATIONS",
+    title: "Learning to think deeply.",
     description:
-      "Before specialising in Computer Science, I enjoyed both social and natural science subjects. I believe all of them are interesting and fun to learn in their own unique ways.",
+      "A biology-specialized education, with a growing interest in the mathematical foundations of data science.",
   },
   experience: {
-    eyebrow: "CAREER_LOG",
-    title: "Professional Experience",
+    eyebrow: "FROM CLASSROOM TO FACTORY DATA",
+    title: "Real data. Real questions.",
     description:
-      "Within Computer Science, I was fascinated by how Data elegantly connects multiple disciplines and as such, decided to pursue a career revolving entirely around this field.",
-  },
-  awards: {
-    eyebrow: "ACHIEVEMENT_LOG",
-    title: "Awards and Achievements",
-    description:
-      "My most significant achievements mostly orbited around academics and leadership, with some sprinkles of the performing arts, sports and outside competitions.",
+      "A summer with a manufacturing BI team taught me what useful analysis looks like beyond the classroom.",
   },
   projects: {
-    eyebrow: "BUILD_LOGS",
-    title: "Selected Projects",
+    eyebrow: "SELECTED EXPLORATIONS",
+    title: "Three questions. Many possibilities.",
     description:
-      "Unlike other Comp Sci students, I mostly enjoy acquiring knowledge through obtaining certificates rather than shipping products, so please excuse the lack of major personal projects outside of work ^^.",
+      "Forecasting energy needs, finding signal in language, and understanding the economics of a discount.",
   },
-  gallery: {
-    eyebrow: "JOURNEY_FRAMES",
-    title: "Learning Journey",
+  awards: {
+    eyebrow: "A MOMENT OF RECOGNITION",
+    title: "Ideas worth pursuing.",
     description:
-      "Looking back, despite the ups and downs, the 12 years of learning and growth in Singapore have completely shaped who I am and I'm excited to see where this foundation will bring me to next.",
-  },
-  journal: {
-    eyebrow: "JOURNAL_FEED",
-    title: "Journal",
-    description:
-      "Perhaps you can see by now, I have a burning passion for synthesising knowledge and sharing it with others. So here are the proofs.",
+      "An opportunity to connect analytical curiosity with entrepreneurship and broader access to education.",
   },
   skills: {
-    eyebrow: "SKILL_MATRIX",
-    title: "Technical Skills and Certifications",
+    eyebrow: "THE LEARNING TOOLKIT",
+    title: "Tools, methods, and momentum.",
     description:
-      "There was a time when I was particularly into collecting new skillsets as if they were pokemons. However, they matter much less now and the only fun things are, to me, the very fundamentals.",
+      "Practical analytics tools and the coursework behind my growing technical foundation.",
+  },
+  community: {
+    eyebrow: "BEYOND THE NOTEBOOK",
+    title: "Data is only part of the story.",
+    description:
+      "Leading a team, helping others learn, and creating together have shaped how I communicate and collaborate.",
   },
   contact: {
-    eyebrow: "CONTACT_INTERFACE",
-    title: "Contact Me",
+    eyebrow: "LET’S KEEP IN TOUCH",
+    title: "The next conversation.",
     description:
-      "With all of this personal information being shared online, I guess you can feel how open I am towards having a chat. So please don't hesitate to reach out!",
+      "I’m interested in learning opportunities at the intersection of mathematics, data, and real-world impact.",
   },
 } satisfies SectionContent;
 
-// Shared visible subsection names follow the established Engineering wording.
 export const subsectionContent = {
-  journal: {
-    videosEyebrow: "VIDEO_FEED",
-    videosTitle: "Educational Videos",
-    writingEyebrow: "WRITING_LOG",
-    writingTitle: "Writing and Technical Notes",
-  },
   skills: {
-    certificatesEyebrow: "CERTIFICATE_PREVIEW",
-    certificatesTitle: "Certificate Gallery",
+    certificatesEyebrow: "CONTINUOUS LEARNING",
+    certificatesTitle: "Coursework & Certifications",
     certificatesDescription:
-      "Click any preview to expand the PDF. Files are configured in the shared certificate data file.",
+      "Learning described in my resume; credential documents are not yet available.",
   },
-  contact: {
-    channelsTitle: "CONNECT_CHANNELS",
-  },
+  contact: { channelsTitle: "CONTACT DETAILS" },
 } as const;

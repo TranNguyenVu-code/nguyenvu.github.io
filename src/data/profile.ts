@@ -1,61 +1,51 @@
-import profileImage from '../assets/profile.jpeg'
-import resumePdf from '../assets/documents/resume.pdf'
-import type { HeroSection, Profile } from '../types/portfolio'
+import resumeDocument from "../assets/Resume - Trần Nguyên Vũ.docx?url";
+import type { HeroSection, Profile } from "../types/portfolio";
 
-export const profile = {
-  name: 'Nham Quoc Hung',
-  slug: 'nham-quoc-hung',
-  role: 'Data Engineer at Torilab Inc.',
-  location: 'Hanoi Capital Region, Vietnam',
-  email: 'nhamhung.gttn@gmail.com',
-  profileImage,
+export const profile: Profile = {
+  name: "Trần Nguyên Vũ",
+  slug: "tran-nguyen-vu",
+  role: "Student · Data Analytics & Data Science",
+  location: "Hanoi, Vietnam",
+  email: "trannguyenvu0102@gmail.com",
+  contactPlaceholder: false,
   resume: {
-    label: 'Download Resume',
-    href: resumePdf,
-    fileName: 'Nham-Quoc-Hung-Resume.pdf',
-    ariaLabel: 'Download Nham Quoc Hung resume PDF',
+    label: "Resume · DOCX",
+    href: resumeDocument,
+    fileName: "Tran-Nguyen-Vu-Resume.docx",
+    ariaLabel: "Download Trần Nguyên Vũ resume (DOCX)",
   },
   summary:
-    'I am a Computer Science graduate with a specialisation in Data and passion for teaching. In a world being increasingly influenced and shaped by technological advances, these domains are my way of navigating through present complexities and making sense of what is coming next.',
+    "I’m a biology-specialized high-school student exploring how mathematics and data can help us understand the world — and make it better.",
   socialLinks: [
     {
-      label: 'GitHub',
-      href: 'https://github.com/nhamhung',
-      ariaLabel: 'Open Nham Quoc Hung GitHub profile',
-    },
-    {
-      label: 'LinkedIn',
-      href: 'https://www.linkedin.com/in/quoc-hung-nham/',
-      ariaLabel: 'Open Nham Quoc Hung LinkedIn profile',
-    },
-    {
-      label: 'Email',
-      href: 'mailto:nhamhung.gttn@gmail.com',
-      ariaLabel: 'Email Nham Quoc Hung',
+      label: "GitHub",
+      href: "https://github.com/TranNguyenVu-code",
+      ariaLabel: "Visit Trần Nguyên Vũ’s GitHub profile",
     },
   ],
-} satisfies Profile
+} satisfies Profile;
 
 export const hero = {
-  eyebrow: '<engineer id="nham-quoc-hung" />',
-  statusBadges: ['SYSTEM STATUS: BUILDING', 'DATA | SOFTWARE | MENTORSHIP'],
-  headline: 'Building reliable data pipelines and scalable data platforms.',
-  highlightedPhrase: 'data pipelines',
-  intro: profile.summary,
+  eyebrow: "A STUDENT’S ANALYTICAL NOTEBOOK",
+  statusBadges: ["HUS · CLASS OF 2027", "HANOI, VIETNAM"],
+  headline: "Curiosity,\nmeet data.",
+  highlightedPhrase: "data",
+  intro:
+    "From factory production records to disaster tweets and energy demand, I’m learning to turn complex questions into useful insights.",
   stats: [
-    { value: '4+ Years', label: 'Experience' },
-    { value: 'Data + Teaching', label: 'Focus' },
-    { value: 'Everything Data-related', label: 'Coverage' },
+    { value: "0.84339", label: "Disaster tweets · F1" },
+    { value: "37 / 435", label: "Kaggle · submission rank" },
+    { value: "2027", label: "Expected graduation" },
   ],
   primaryAction: {
-    label: 'View Projects',
-    sectionId: 'projects',
-    ariaLabel: 'Scroll to selected projects',
+    label: "Explore my work",
+    sectionId: "projects",
+    ariaLabel: "Explore selected analytics projects",
   },
   secondaryAction: {
-    label: 'Contact',
-    sectionId: 'contact',
-    ariaLabel: 'Scroll to contact section',
+    label: "My story",
+    sectionId: "about",
+    ariaLabel: "Read about Trần Nguyên Vũ",
   },
-  stackHighlights: ['Big Data', 'Data Analytics', 'Data Science', 'Data Engineering', 'Machine Learning', 'Deep Learning'],
-} satisfies HeroSection
+  stackHighlights: ["Python", "SQL", "Tableau", "Applied Mathematics"],
+} satisfies HeroSection;

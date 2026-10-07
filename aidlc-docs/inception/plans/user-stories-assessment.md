@@ -1,33 +1,32 @@
 # User Stories Assessment
 
-## Request Analysis
+## Request analysis
 
-- **Original Request**: Convert the existing portfolio into a student-friendly baseline template with detailed GitHub Pages setup instructions, maintainable code, and lightweight tests.
-- **User Impact**: Direct. Students will customize, run, test, and deploy the template; visitors will experience the resulting portfolio.
-- **Complexity Level**: Moderate to comprehensive.
-- **Stakeholders**:
-  - Student template user.
-  - Portfolio visitor such as recruiter, mentor, peer, or reviewer.
-  - Template maintainer.
+- Workflow: Tran Nguyen Vu — Student Analytics Portfolio Revamp.
+- User impact: direct; visitors receive a different identity, content structure, project evidence, and contact presentation.
+- Complexity: moderate; one existing frontend with two selectable presentations.
+- Stakeholders: admissions/recruitment reviewers, mentors/peers, and the student portfolio owner.
+- Basis: approved requirements.md and current reverse-engineering artifacts. This assessment replaces the previous template-onboarding scope.
 
-## Assessment Criteria Met
+## Assessment criteria met
 
-- [x] High Priority: User experience changes affect student customization and deployment workflows.
-- [x] High Priority: Multi-persona system with students, visitors, and maintainers.
-- [x] High Priority: New template capability changes how users interact with the project.
-- [x] Medium Priority: Changes span multiple components, documentation, tests, and deployment configuration.
-- [x] Medium Priority: User acceptance criteria are valuable for validating beginner-readability and deployment success.
-- [x] Benefits: Stories clarify what "student-friendly" means in concrete workflows.
+- [x] High priority: changes affect user-facing sections, navigation, and interactions.
+- [x] High priority: multiple reader types assess student evidence and learning differently.
+- [x] Scope: retained display modes and placeholder contact span multiple touchpoints.
+- [x] Benefit: explicit acceptance criteria distinguish actual project evidence from illustrative graphics and placeholders.
 
 ## Decision
 
-**Execute User Stories**: Yes
+Execute User Stories: Yes, at concise depth.
 
-**Reasoning**: User stories add value because the refactor is not just internal cleanup. It changes how students find editable content, customize assets, verify the site locally, and deploy through GitHub Pages. Stories will help keep the code refactor and documentation grounded in real user journeys.
+Use a small set of visitor-journey stories grounded in approved requirements. The stage verifies the reader can identify the student, review evidence, navigate in preferred modes, download the correct resume, and recognize placeholder contact information. No new discovery questionnaire is needed for facts already resolved in Requirements Analysis.
 
-## Expected Outcomes
+## Expected outcomes
 
-- Define personas for students, visitors, and maintainers.
-- Translate template requirements into testable user stories.
-- Provide acceptance criteria for customization, deployment, maintainability, accessibility, and testing.
-- Improve shared understanding before workflow planning and implementation.
+- Reader and owner personas mapped to stories.
+- Independent, testable stories with concise observable acceptance criteria.
+- Coverage of content fidelity, retained navigation/display modes, accessibility, and contact placeholders.
+
+## Extension compliance
+
+Security Baseline: N/A, explicitly disabled (B). Property-Based Testing: N/A, explicitly disabled (C). Full rules remain unloaded; enforcement skipped.

@@ -5,10 +5,6 @@ import type { NavigationItem, SectionId } from "../types/portfolio";
 
 export type PortfolioTemplateId = "engineering" | "business";
 
-export type JournalPostPageProps = {
-  slug: string;
-};
-
 export type PortfolioShellProps = {
   activeSection: SectionId;
   activeTemplateId: PortfolioTemplateId;
@@ -26,7 +22,6 @@ export type PortfolioTemplate = {
   label: string;
   description: string;
   ShellComponent: ComponentType<PortfolioShellProps>;
-  JournalPostComponent: ComponentType<JournalPostPageProps>;
   chapterLabels: Record<SectionId, string>;
   sectionComponents: Record<SectionId, ComponentType>;
   isSectionVisible?: (sectionId: SectionId) => boolean;

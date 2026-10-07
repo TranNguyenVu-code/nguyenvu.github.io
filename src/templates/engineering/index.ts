@@ -1,46 +1,40 @@
+import Hero from "../../components/Hero";
 import About from "../../components/About";
-import Awards from "../../components/Awards";
-import Contact from "../../components/Contact";
 import Education from "../../components/Education";
 import Experience from "../../components/Experience";
-import Gallery from "../../components/Gallery";
-import Hero from "../../components/Hero";
-import Journal from "../../components/Journal";
-import JournalPostPage from "../../components/JournalPostPage";
 import Projects from "../../components/Projects";
+import Awards from "../../components/Awards";
 import Skills from "../../components/Skills";
+import Community from "../../components/Community";
+import Contact from "../../components/Contact";
+import EngineeringShell from "./EngineeringShell";
 import { portfolioTemplateOptions } from "../options";
 import type { PortfolioTemplate } from "../types";
-import EngineeringShell from "./EngineeringShell";
 
 export const engineeringChapterLabels = {
   home: "Home",
   about: "About",
   education: "Education",
-  experience: "Experience",
-  awards: "Awards",
-  projects: "Projects",
-  gallery: "Gallery",
-  journal: "Journal",
-  skills: "Skills",
+  experience: "Analytics Experience",
+  projects: "Selected Projects",
+  awards: "Achievements",
+  skills: "Skills & Learning",
+  community: "Leadership & Community",
   contact: "Contact",
 } satisfies PortfolioTemplate["chapterLabels"];
-
 export const engineeringTemplate = {
   ...portfolioTemplateOptions.engineering,
   ShellComponent: EngineeringShell,
-  JournalPostComponent: JournalPostPage,
   chapterLabels: engineeringChapterLabels,
   sectionComponents: {
     home: Hero,
     about: About,
     education: Education,
     experience: Experience,
-    awards: Awards,
     projects: Projects,
-    gallery: Gallery,
-    journal: Journal,
+    awards: Awards,
     skills: Skills,
+    community: Community,
     contact: Contact,
   },
 } satisfies PortfolioTemplate;

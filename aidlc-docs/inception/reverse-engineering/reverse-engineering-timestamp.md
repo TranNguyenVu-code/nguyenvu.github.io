@@ -1,11 +1,12 @@
 # Reverse Engineering Metadata
 
-**Analysis Date**: 2026-07-23T12:18:16Z
-**Analyzer**: AI-DLC
-**Workspace**: /Users/nhamhhung/my-portfolio
-**Total Files Analyzed**: 274
+- Analysis date: 2026-10-07T01:43:18Z
+- Analyzer: AI-DLC
+- Workspace: `/Users/nhamhhung/nguyenvu.github.io`
+- Source files inventoried: 113
+- Analysis scope: App, registries, both presentations, typed content, assets, routing/contact utilities, test inventory, build/deployment configuration, and DOCX text.
 
-## Artifacts Generated
+## Artifacts refreshed
 
 - [x] business-overview.md
 - [x] architecture.md
@@ -15,8 +16,6 @@
 - [x] technology-stack.md
 - [x] dependencies.md
 - [x] code-quality-assessment.md
-- [x] github-pages-template-guide.md (retained; deployment guidance remains valid)
+- [x] student-source-review.md
 
-## Refresh Scope
-
-This refresh incorporates typed student data, local journal posts, the single/multi-page layout hook, Engineering/Neutral/Business shells, App-owned runtime style selection, guarded browser persistence, shared component utilities, automated tests, and environment-driven GitHub Pages paths.
+Existing GitHub Pages guide retained as historical guidance; no deployment changes are proposed by this analysis.

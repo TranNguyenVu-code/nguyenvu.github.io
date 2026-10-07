@@ -6,7 +6,6 @@ import { selectedTemplateId } from "./data/template";
 import { usePortfolioLayout } from "./hooks/usePortfolioLayout";
 import { getPortfolioTemplate } from "./templates";
 import type { PortfolioTemplate, PortfolioTemplateId } from "./templates/types";
-import { parseJournalPostHash } from "./utils/journal";
 import {
   getEnabledNavigationItems,
   getEnabledSectionIds,
@@ -26,7 +25,6 @@ export function PortfolioApp({ initialTemplate }: PortfolioAppProps) {
     () =>
       getInitialPortfolioTemplateId(initialTemplate?.id ?? selectedTemplateId),
   );
-  const [locationHash, setLocationHash] = useState(() => window.location.hash);
   const template = getPortfolioTemplate(activeTemplateId);
   const enabledNavigationItems = useMemo(
     () => getEnabledNavigationItems(navigation, template.isSectionVisible),
@@ -49,43 +47,35 @@ export function PortfolioApp({ initialTemplate }: PortfolioAppProps) {
   } = usePortfolioLayout(enabledSectionIds, scrollActiveSection);
 
   useEffect(() => {
-    const syncLocationHash = () => setLocationHash(window.location.hash);
+    if (!isMultiPageLayout) return;
+    const frame = window.requestAnimationFrame(() => {
+      const main = document.getElementById("portfolio-main");
+      main?.scrollIntoView({ behavior: "instant", block: "start" });
+      main
+        ?.querySelector<HTMLElement>("[data-chapter-heading]")
+        ?.focus({ preventScroll: true });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [isMultiPageLayout, activePageSection]);
 
-    window.addEventListener("hashchange", syncLocationHash);
-    window.addEventListener("popstate", syncLocationHash);
-
-    return () => {
-      window.removeEventListener("hashchange", syncLocationHash);
-      window.removeEventListener("popstate", syncLocationHash);
-    };
-  }, []);
-
-  const localJournalPostSlug = parseJournalPostHash(locationHash);
   const visibleSectionIds = isMultiPageLayout
     ? [activePageSection]
     : enabledSectionIds;
   const ShellComponent = template.ShellComponent;
-  const JournalPostComponent = template.JournalPostComponent;
-  const shellActiveSection = localJournalPostSlug ? "journal" : activeSection;
   const selectTemplate = useCallback((templateId: PortfolioTemplateId) => {
     const resolvedTemplateId = getPortfolioTemplate(templateId).id;
 
     persistPortfolioTemplateId(resolvedTemplateId);
     setActiveTemplateId(resolvedTemplateId);
   }, []);
-  const selectedContent = localJournalPostSlug ? (
-    <JournalPostComponent slug={localJournalPostSlug} />
-  ) : (
-    visibleSectionIds.map((sectionId) => {
-      const SectionComponent = sectionComponents[sectionId];
-
-      return <SectionComponent key={sectionId} />;
-    })
-  );
+  const selectedContent = visibleSectionIds.map((sectionId) => {
+    const SectionComponent = sectionComponents[sectionId];
+    return <SectionComponent key={sectionId} />;
+  });
 
   return (
     <ShellComponent
-      activeSection={shellActiveSection}
+      activeSection={activeSection}
       activeTemplateId={activeTemplateId}
       getNavigationHref={getNavigationHref}
       layoutMode={layoutMode}

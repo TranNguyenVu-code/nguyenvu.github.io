@@ -1,246 +1,171 @@
-# Execution Plan
+# Execution Plan — Student Analytics Portfolio Revamp
 
-## Detailed Analysis Summary
+## Prior context and approval
 
-### Transformation Scope
+Sources: current reverse-engineering architecture/inventory/stack/dependencies; approved requirements with answered verification questions; approved eight stories and three personas. This plan supersedes the previous template-onboarding execution plan for the active revamp. Historical approvals remain in the append-only audit.
 
-- **Transformation Type**: Brownfield application structure refactor with documentation, test, and deployment configuration enhancements.
-- **Primary Changes**:
-  - Extract student-editable portfolio content into typed data/config modules.
-  - Centralize section/navigation configuration.
-  - Add shared scroll utilities and selected reusable UI helpers.
-  - Improve accessible labels for interactive links and controls.
-  - Improve GitHub Pages base path handling through workflow/build configuration.
-  - Rewrite student-facing README and deployment/customization guide.
-  - Add lightweight tests for rendering, navigation config, and template data.
-- **Related Components**:
-  - `src/App.tsx`
-  - `src/components/*`
-  - `src/assets/*`
-  - New `src/data/*`, `src/types/*`, and `src/utils/*`
-  - `vite.config.ts`
-  - `.github/workflows/deploy.yml`
-  - `package.json`
-  - README and deployment documentation
+## Detailed analysis
 
-### Change Impact Assessment
+- Transformation: owner/content replacement and visual redesign within one React/Vite application, using its existing two-template architecture.
+- User-facing impact: new student identity, analytics-focused evidence, new visual theme, relevant section organization, and explicit contact placeholders.
+- Structural impact: retain App-owned navigation/layout/preferences and the registry; adapt existing section components and remove obsolete section dependencies. No services or separate packages are introduced.
+- Data impact: update the existing typed portfolio records and section contract; represent leadership using existing resume-style records. Make absent images/evidence and placeholder contact status explicit where required. There is no database/schema migration or new analytical algorithm.
+- Internal contracts: coordinate section IDs/maps, data fields, navigation helpers, and tests. No external API change.
+- Quality impact: new color combinations and content density require accessibility/contrast/responsive verification; visual asset choices must remain lightweight.
+- Deployment: keep static GitHub Pages and the existing base-path configuration; no infrastructure resource or hosting change.
 
-- **User-facing changes**: Yes. The deployed portfolio should preserve the current visual experience while improving accessibility labels and deployment reliability.
-- **Structural changes**: Yes. Editable content moves from components into typed data modules, shared section config becomes the navigation source of truth, and repeated helpers are centralized.
-- **Data model changes**: Yes. New TypeScript data models are needed for portfolio content and navigation config.
-- **API changes**: No external API changes. Internal component/data contracts will change.
-- **NFR impact**: Yes. Maintainability, beginner readability, testability, accessibility, and deployment reliability are core requirements.
+## Component relationships and change priority
 
-### Component Relationships
+| Area | Change | Reason and priority |
+| --- | --- | --- |
+| Types and data | Important contract/content updates | Both templates must share accurate student facts, optional evidence, and placeholder status. Critical. |
+| App, layout/navigation utilities | Focused compatibility updates | Remove old destinations, preserve section actions in both layouts, handle stale routes safely. Critical. |
+| Existing Engineering/Business shells and section components | Visual/content changes | Analytics theme, evidence cards, community presentation, and usable controls. Critical. |
+| CSS/theme tokens | Broad visual update within current style boundaries | Ivory/ink, teal/chartreuse, focus/contrast/reduced-motion consistency. Critical. |
+| Assets and metadata | Content cleanup and branding | Remove stale owner imagery/docs, preserve both DOCX inputs, correct title/favicon/resume access. Critical. |
+| Tests | Update relevant expectations and behaviors | Student data, retired routes, retained modes, placeholder contact, and asset resolution. Important. |
+| GitHub Actions/Vite deployment | Retain existing configuration | Verify compatibility; no planned hosting changes. Supporting. |
 
-```mermaid
-flowchart TD
-    Data["Typed Portfolio Data"]
-    Types["Shared Types"]
-    Utils["Shared Utilities"]
-    App["App Shell"]
-    Sections["Section Components"]
-    Navbar["Navbar"]
-    Docs["Student Documentation"]
-    Tests["Lightweight Tests"]
-    Deploy["GitHub Pages Workflow"]
-    Vite["Vite Config"]
+Dependency flow: typed content/section contract -> navigation/registry -> existing shells and sections -> CSS/assets -> integrated verification. This is one package with coordinated module updates, not a multi-package release.
 
-    Types --> Data
-    Data --> App
-    Data --> Sections
-    Data --> Navbar
-    Utils --> App
-    Utils --> Sections
-    App --> Navbar
-    App --> Sections
-    Data --> Tests
-    App --> Tests
-    Vite --> Deploy
-    Docs --> Deploy
-```
+## Risk assessment
 
-### Text Alternative
+- Risk: medium because content, routes, two templates, styling, and assets change together.
+- Main failure modes: deleting still-imported assets, leaving retired links active, inconsistent facts between styles, unreadable dark-mode accents, and scroll-only actions in section layouts.
+- Rollback complexity: moderate; use reviewable repository diffs and avoid commits/deployment until separately requested. Preserve user documents and unrelated changes.
+- Testing complexity: moderate; existing tests plus focused interaction/visual checks cover the changed boundaries.
 
-Shared types define portfolio data. Data feeds the app, navbar, and section components. Shared utilities support app and section behavior. Tests validate data and rendering. Vite configuration feeds the GitHub Pages deployment workflow, and documentation explains the student setup path.
-
-### Risk Assessment
-
-- **Risk Level**: Medium.
-- **Rollback Complexity**: Moderate. Changes touch many components, but the app is static and can be rolled back through Git.
-- **Testing Complexity**: Moderate. Build, lint, and lightweight tests should catch most template regressions.
-- **Primary Risks**:
-  - Accidentally changing the current visual output while refactoring data.
-  - Introducing incorrect asset imports while moving data.
-  - Misconfiguring GitHub Pages base path behavior.
-  - Adding test dependencies that conflict with the current React/Vite stack.
-
-## Module Update Strategy
-
-- **Update Approach**: Hybrid sequential.
-- **Critical Path**:
-  1. Define shared types and data/config modules.
-  2. Refactor components to consume data/config and shared utilities.
-  3. Update deployment base path handling.
-  4. Update documentation.
-  5. Add tests and verification scripts.
-  6. Run build, lint, and tests.
-- **Coordination Points**:
-  - Navigation IDs must stay aligned between data, app shell, navbar, tests, and documentation.
-  - Asset imports must remain Vite-compatible.
-  - GitHub Pages workflow must pass the correct base path to Vite.
-- **Testing Checkpoints**:
-  - TypeScript build after data extraction.
-  - Lint after component refactor.
-  - Test run after adding test setup.
-  - Production build after deployment config changes.
-
-## Workflow Visualization
+## Workflow visualization
 
 ```mermaid
 flowchart TD
-    Start(["User Request"])
-
-    subgraph INCEPTION["INCEPTION PHASE"]
-        WD["Workspace Detection<br/><b>COMPLETED</b>"]
-        RE["Reverse Engineering<br/><b>COMPLETED</b>"]
-        RA["Requirements Analysis<br/><b>COMPLETED</b>"]
-        US["User Stories<br/><b>COMPLETED</b>"]
-        WP["Workflow Planning<br/><b>COMPLETED</b>"]
-        AD["Application Design<br/><b>EXECUTE</b>"]
-        UG["Units Generation<br/><b>EXECUTE</b>"]
-    end
-
-    subgraph CONSTRUCTION["CONSTRUCTION PHASE"]
-        FD["Functional Design<br/><b>EXECUTE</b>"]
-        NFRA["NFR Requirements<br/><b>EXECUTE</b>"]
-        NFRD["NFR Design<br/><b>EXECUTE</b>"]
-        ID["Infrastructure Design<br/><b>EXECUTE</b>"]
-        CG["Code Generation<br/>(Planning + Generation)<br/><b>EXECUTE</b>"]
-        BT["Build and Test<br/><b>EXECUTE</b>"]
-    end
-
-    subgraph OPERATIONS["OPERATIONS PHASE"]
-        OPS["Operations<br/><b>PLACEHOLDER</b>"]
-    end
-
+    Start["Student analytics revamp"]
+    WD["Workspace Detection - COMPLETED"]
+    RE["Reverse Engineering - COMPLETED"]
+    RA["Requirements Analysis - COMPLETED"]
+    US["User Stories - COMPLETED"]
+    WP["Workflow Planning - REVIEW"]
+    AD["Application Design - SKIP"]
+    UP["Units Planning - SKIP"]
+    UG["Units Generation - SKIP"]
+    FD["Functional Design - SKIP"]
+    NFRA["NFR Requirements - EXECUTE"]
+    NFRD["NFR Design - EXECUTE"]
+    ID["Infrastructure Design - SKIP"]
+    CG["Code Generation - EXECUTE"]
+    BT["Build and Test - EXECUTE"]
+    OPS["Operations - PLACEHOLDER"]
+    End["Workflow complete"]
     Start --> WD
     WD --> RE
     RE --> RA
     RA --> US
     US --> WP
     WP --> AD
-    AD --> UG
+    AD --> UP
+    UP --> UG
     UG --> FD
     FD --> NFRA
     NFRA --> NFRD
     NFRD --> ID
     ID --> CG
     CG --> BT
-    BT --> End(["Complete"])
-
+    BT --> OPS
+    OPS --> End
     style WD fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style RE fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style RA fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style US fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
     style WP fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
-    style AD fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style UG fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style FD fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style NFRA fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style NFRD fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style ID fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style CG fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style BT fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray: 5 5,color:#000
-    style OPS fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray: 5 5,color:#000
+    style AD fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray:5 5,color:#000
+    style UP fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray:5 5,color:#000
+    style UG fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray:5 5,color:#000
+    style FD fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray:5 5,color:#000
+    style NFRA fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray:5 5,color:#000
+    style NFRD fill:#FFA726,stroke:#E65100,stroke-width:3px,stroke-dasharray:5 5,color:#000
+    style ID fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray:5 5,color:#000
+    style CG fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
+    style BT fill:#4CAF50,stroke:#1B5E20,stroke-width:3px,color:#fff
+    style OPS fill:#BDBDBD,stroke:#424242,stroke-width:2px,stroke-dasharray:5 5,color:#000
     style Start fill:#CE93D8,stroke:#6A1B9A,stroke-width:3px,color:#000
     style End fill:#CE93D8,stroke:#6A1B9A,stroke-width:3px,color:#000
-    style INCEPTION fill:#BBDEFB,stroke:#1565C0,stroke-width:3px,color:#000
-    style CONSTRUCTION fill:#C8E6C9,stroke:#2E7D32,stroke-width:3px,color:#000
-    style OPERATIONS fill:#FFF59D,stroke:#F57F17,stroke-width:3px,color:#000
-
     linkStyle default stroke:#333,stroke-width:2px
 ```
 
-### Text Alternative
+Text alternative: completed Workspace Detection -> Reverse Engineering -> Requirements Analysis -> User Stories -> Workflow Planning review. Skip separate Application Design, Units Planning/Generation, and Functional Design. Execute concise NFR Requirements -> NFR Design. Skip Infrastructure Design. Execute Code Generation planning/approval -> implementation/review -> Build and Test. Operations remains the workflow placeholder.
 
-Completed stages: Workspace Detection, Reverse Engineering, Requirements Analysis, User Stories, Workflow Planning. Next stages to execute: Application Design, Units Generation, Functional Design, NFR Requirements, NFR Design, Infrastructure Design, Code Generation, Build and Test. Operations remains a placeholder.
+## Stage decisions
 
-## Phases to Execute
+| Stage | Decision | Depth and rationale |
+| --- | --- | --- |
+| Workspace Detection | Completed | Existing application and source documents confirmed. |
+| Reverse Engineering | Completed/approved | Current two-template architecture and source evidence reviewed. |
+| Requirements Analysis | Completed/approved | Student scope, dates, placeholders, theme, and extensions resolved. |
+| User Stories | Completed/approved | Eight stories and three personas; requirement coverage checked. |
+| Workflow Planning | Execute; review pending | Standard scope/sequence and stage selection. |
+| Application Design | Skip | Adapt existing App, template, section, and shared-UI boundaries; no new service or independent component architecture needed. |
+| Units Planning/Generation | Skip | One cohesive frontend unit; no separate service/package decomposition. |
+| Functional Design | Skip | Source-backed display records and simple placeholder/route conditions; no complex business rules, new database model, or analytics computation. |
+| NFR Requirements | Execute | Minimal: confirm accessibility, responsiveness, asset weight, reliability, and compatibility criteria already stated in requirements. |
+| NFR Design | Execute | Minimal: map those criteria to current theme tokens, controls, reduced-motion behavior, asset choices, and verification. |
+| Infrastructure Design | Skip | Hosting/build architecture already defined; no infrastructure change. |
+| Code Generation | Execute | Standard: explicit checkbox plan, approval, implementation, and required review. |
+| Build and Test | Execute | Run appropriate checks and generate all required build/test instruction artifacts; document N/A performance-load testing for a static UI where appropriate. |
+| Operations | Placeholder | No deployment/publishing is requested in this workflow. |
 
-### INCEPTION PHASE
+Four stages remain to execute after this plan's approval: NFR Requirements, NFR Design, Code Generation, and Build and Test. Each keeps its AI-DLC review gate. There is one implementation unit, `student-analytics-portfolio`.
 
-- [x] Workspace Detection - COMPLETED
-- [x] Reverse Engineering - COMPLETED
-- [x] Requirements Analysis - COMPLETED
-- [x] User Stories - COMPLETED
-- [x] Workflow Planning - COMPLETED
-- [ ] Application Design - EXECUTE
-  - **Rationale**: New data modules, shared types, reusable helpers, component responsibilities, and deployment configuration boundaries need a lightweight design before implementation.
-- [ ] Units Generation - EXECUTE
-  - **Rationale**: Work should be decomposed into coordinated units for data extraction, component refactor, documentation, deployment config, and tests.
+## Package/module change sequence
 
-### CONSTRUCTION PHASE
+1. Finalize concise NFR criteria/design for the existing frontend.
+2. Prepare the code-generation checkbox plan with exact affected files and coordinated section/type updates.
+3. Update shared identity, academic/internship/project/learning/community content and placeholder configuration.
+4. Adapt existing section maps/navigation and rendering for the retained content; remove obsolete journal/media routes/evidence.
+5. Restyle shells, hero, section headings/cards, project evidence, skills, and contact for the analytics theme in both color modes.
+6. Replace old portrait/logo/project imagery with honest abstract/code-native visuals; wire the supplied student resume download and metadata.
+7. Remove old assets/content/components only after resolving references; preserve both source DOCX files.
+8. Update applicable existing tests; verify interaction behavior, accessibility, responsive presentation, lint, and TypeScript/Vite build.
+9. Generate required build/test instructions and summarize results with material limits.
 
-- [ ] Functional Design - EXECUTE
-  - **Rationale**: New typed data models and shared utilities need functional design at unit level.
-- [ ] NFR Requirements - EXECUTE
-  - **Rationale**: Maintainability, beginner readability, accessibility, testability, and deployment reliability are explicit NFRs.
-- [ ] NFR Design - EXECUTE
-  - **Rationale**: NFRs must be incorporated into code organization, tests, documentation, and deployment behavior.
-- [ ] Infrastructure Design - EXECUTE
-  - **Rationale**: GitHub Pages and GitHub Actions deployment path handling should be designed before editing workflow/build configuration.
-- [ ] Code Generation - EXECUTE
-  - **Rationale**: Implementation planning and code generation are needed for the approved refactor.
-- [ ] Build and Test - EXECUTE
-  - **Rationale**: Build, lint, test, and deployment verification instructions are required.
+Module dependencies are updated sequentially at contract boundaries. No sub-agents, multi-package version rollout, infrastructure provisioning, or new external data services are required.
 
-### OPERATIONS PHASE
+## Verification checkpoints and success criteria
 
-- [ ] Operations - PLACEHOLDER
-  - **Rationale**: Future deployment and monitoring workflows are outside the current AI-DLC process.
+- Data fidelity: source-backed high-school profile; report internship dates; correct F1/rank and project findings; no blank GPA or invented claims.
+- Interaction: both templates, both layouts, both color modes, mobile menu, hash navigation/stale-route fallback, saved preferences, resume access, and inactive placeholder channels.
+- Visual: default analytics theme across retained sections; responsive widths including 320px; keyboard focus, text/control contrast, and reduced motion.
+- Cleanup: no former-owner content on active routes or retired direct links; no broken asset imports; supplied DOCX files retained.
+- Automated: relevant tests, ESLint, and TypeScript/Vite production build pass. Broaden/repeat checks only when failures or further changes justify it.
+- Delivery: working local code and build/test documentation; no automatic publication. If browser visual tooling is unavailable, record that limitation and perform feasible static/runtime checks.
 
-## Skipped Stages
+## Planning progress
 
-- No current INCEPTION or CONSTRUCTION stage is recommended for skip because the approved scope is comprehensive and touches application structure, data models, NFRs, deployment configuration, documentation, and tests.
+- [x] Record generated-story/persona approval and load prior context.
+- [x] Assess scope, component relationships, risks, and module dependencies.
+- [x] Determine applicable stages and depth for one frontend unit.
+- [x] Validate the workflow diagram and include a text alternative before writing.
+- [x] Create the execution plan and update state/audit.
+- [x] Obtain explicit execution-plan approval — user: "approve and continue".
 
-## Package Change Sequence
+## Remaining execution progress
 
-1. `src/types/*` - Add shared portfolio data types first.
-2. `src/data/*` - Move editable example content into typed data/config modules.
-3. `src/utils/*` - Add shared scroll/navigation utilities.
-4. `src/components/*` and `src/App.tsx` - Refactor UI to consume data/config and utilities.
-5. `vite.config.ts` and `.github/workflows/deploy.yml` - Improve GitHub Pages base path handling.
-6. `package.json` and test files - Add lightweight test setup and scripts.
-7. `README.md` and `DEPLOYMENT.md` - Rewrite student-facing setup and deployment guidance.
-8. `aidlc-docs/construction/build-and-test/*` - Generate build/test instruction artifacts.
+- [x] NFR Requirements — criteria and stack artifacts generated.
+- [x] NFR Requirements artifact approval.
+- [x] NFR Design — existing UI/theme design artifacts generated.
+- [x] NFR Design artifact approval.
+- [x] Code Generation Part 1 — detailed plan prepared.
+- [x] Code Generation plan approval.
+- [x] Code Generation Part 2 — implementation and review.
+- [x] Build and Test — checks, instruction artifacts, and review.
 
-## Estimated Timeline
+## Estimated effort
 
-- **Total Remaining Stages**: 8 before Operations placeholder.
-- **Estimated Duration**: Medium. The work is not algorithmically complex, but it affects many files and needs careful verification.
+A focused multi-file frontend revamp across four remaining stages. Exact elapsed time depends on review responses and verification results; no fixed delivery date is assumed.
 
-## Success Criteria
+## Extension compliance
 
-- **Primary Goal**: The portfolio becomes a maintainable student baseline template with clear content customization, GitHub Pages deployment guidance, and lightweight tests.
-- **Key Deliverables**:
-  - Typed portfolio data/config modules.
-  - Refactored components consuming shared data and utilities.
-  - Improved accessible labels.
-  - GitHub Pages base path workflow improvements.
-  - Beginner-friendly README and detailed deployment/customization guide.
-  - Lightweight test setup and passing test command.
-  - AI-DLC build and test instructions.
-- **Quality Gates**:
-  - `npm run lint` passes.
-  - `npm run test` passes after test setup is added.
-  - `npm run build` passes.
-  - Student documentation explains local setup, customization, deployment, and troubleshooting.
-  - Current visual/content experience is preserved as example data.
+Security Baseline: N/A, explicitly disabled (B). Property-Based Testing: N/A, explicitly disabled (C). Full rules remain unloaded; enforcement skipped. Accessibility, correctness, and existing build/test checks remain required by approved website requirements.
 
-## Extension Rule Compliance
+## User control
 
-| Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User opted out during Requirements Analysis. |
-| Property-Based Testing | Disabled | User opted out during Requirements Analysis. |
+You may request changes or include any skipped stage. Approval advances to NFR Requirements; it does not remove the later review gates specified by the AI-DLC workflow.

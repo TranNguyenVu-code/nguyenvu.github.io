@@ -46,10 +46,6 @@ describe("portfolio template registry", () => {
         template.ShellComponent,
         `${template.id} template needs a shell`,
       ).toBeTypeOf("function");
-      expect(
-        template.JournalPostComponent,
-        `${template.id} template needs a journal page`,
-      ).toBeTypeOf("function");
 
       for (const sectionId of sectionIds) {
         expect(

@@ -134,8 +134,8 @@ export const usePortfolioLayout = (
   );
 
   const [layoutMode, setLayoutMode] = useState<LayoutMode>(() => {
-    if (canUseBrowser() && isMultiPageSectionHash(window.location.hash)) {
-      return "multi";
+    if (canUseBrowser() && window.location.hash) {
+      return isMultiPageHash(window.location.hash) ? "multi" : "single";
     }
 
     return readStoredLayoutMode();
@@ -158,33 +158,47 @@ export const usePortfolioLayout = (
 
   useEffect(() => {
     const handleHashChange = () => {
-      if (!isMultiPageSectionHash(window.location.hash)) return;
+      const isMulti = isMultiPageHash(window.location.hash);
 
       const hashSection = parseSectionHash(
         window.location.hash,
         enabledSectionIds,
       );
       const resolvedSection = hashSection ?? fallbackSectionId;
+      if (window.location.hash && !hashSection) {
+        replaceBrowserHash(
+          isMulti
+            ? createSectionHash(resolvedSection)
+            : createAnchorHash(resolvedSection),
+        );
+      }
 
-      setLayoutMode("multi");
-      writeStoredLayoutMode("multi");
+      setLayoutMode(isMulti ? "multi" : "single");
+      writeStoredLayoutMode(isMulti ? "multi" : "single");
       setActivePageSection(resolvedSection);
     };
 
     window.addEventListener("hashchange", handleHashChange);
-
-    return () => window.removeEventListener("hashchange", handleHashChange);
+    window.addEventListener("popstate", handleHashChange);
+    return () => {
+      window.removeEventListener("hashchange", handleHashChange);
+      window.removeEventListener("popstate", handleHashChange);
+    };
   }, [enabledSectionIds, fallbackSectionId]);
 
   useEffect(() => {
     if (
       canUseBrowser() &&
-      isMultiPageSectionHash(window.location.hash) &&
+      window.location.hash &&
       !parseSectionHash(window.location.hash, enabledSectionIds)
     ) {
-      replaceBrowserHash(createSectionHash(visibleActivePageSection));
+      replaceBrowserHash(
+        isMultiPageHash(window.location.hash)
+          ? createSectionHash(visibleActivePageSection)
+          : createAnchorHash(fallbackSectionId),
+      );
     }
-  }, [enabledSectionIds, visibleActivePageSection]);
+  }, [enabledSectionIds, visibleActivePageSection, fallbackSectionId]);
 
   const navigateToSection = useCallback(
     (sectionId: SectionId) => {
@@ -207,35 +221,37 @@ export const usePortfolioLayout = (
   );
 
   const toggleLayoutMode = useCallback(() => {
-    setLayoutMode((currentMode) => {
-      const nextMode: LayoutMode =
-        currentMode === "single" ? "multi" : "single";
-      const targetSectionId = resolveSectionId(
-        currentMode === "single"
-          ? scrollActiveSection
-          : visibleActivePageSection,
-        enabledSectionIds,
-        fallbackSectionId,
-      );
-
-      writeStoredLayoutMode(nextMode);
-      setActivePageSection(targetSectionId);
-
-      if (nextMode === "multi") {
-        updateBrowserHash(createSectionHash(targetSectionId));
-      } else {
-        updateBrowserHash(createAnchorHash(targetSectionId));
-        window.setTimeout(() => scrollToSection(targetSectionId), 0);
-      }
-
-      return nextMode;
-    });
+    const nextMode: LayoutMode = layoutMode === "single" ? "multi" : "single";
+    const targetSectionId = resolveSectionId(
+      layoutMode === "single" ? scrollActiveSection : visibleActivePageSection,
+      enabledSectionIds,
+      fallbackSectionId,
+    );
+    writeStoredLayoutMode(nextMode);
+    setLayoutMode(nextMode);
+    setActivePageSection(targetSectionId);
+    updateBrowserHash(
+      nextMode === "multi"
+        ? createSectionHash(targetSectionId)
+        : createAnchorHash(targetSectionId),
+    );
+    if (nextMode === "single")
+      window.setTimeout(() => scrollToSection(targetSectionId), 0);
   }, [
+    layoutMode,
     enabledSectionIds,
     fallbackSectionId,
     scrollActiveSection,
     visibleActivePageSection,
   ]);
+
+  useEffect(() => {
+    const handleSectionAction = (event: Event) =>
+      navigateToSection((event as CustomEvent<SectionId>).detail);
+    window.addEventListener("portfolio-navigate", handleSectionAction);
+    return () =>
+      window.removeEventListener("portfolio-navigate", handleSectionAction);
+  }, [navigateToSection]);
 
   const getNavigationHref = useCallback(
     (sectionId: SectionId) =>

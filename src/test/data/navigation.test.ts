@@ -9,11 +9,10 @@ const expectedSectionIds: SectionId[] = [
   "about",
   "education",
   "experience",
-  "awards",
   "projects",
-  "gallery",
-  "journal",
+  "awards",
   "skills",
+  "community",
   "contact",
 ];
 

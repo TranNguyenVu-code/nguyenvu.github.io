@@ -1,127 +1,135 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
-
 :root {
-  --bg-900: #040b16;
-  --bg-800: #071324;
-  --bg-700: #0c1d34;
-  --surface-900: rgba(8, 21, 39, 0.88);
-  --surface-800: rgba(14, 31, 54, 0.92);
-  --line-700: rgba(118, 168, 255, 0.22);
-  --line-500: rgba(118, 168, 255, 0.38);
-  --text-100: #eaf2ff;
-  --text-300: #9cb2d9;
-  --accent-400: #45a2ff;
-  --accent-500: #2280eb;
-  --accent-300: #62f0d5;
-  --primary-bg: #176fc3;
-  --primary-hover-bg: #1b75cc;
-  --primary-text: #ffffff;
-  --page-glow-primary: rgba(36, 132, 255, 0.22);
-  --page-glow-secondary: rgba(98, 240, 213, 0.12);
-  --nav-bg: rgba(4, 12, 24, 0.64);
-  --nav-bg-scrolled: rgba(5, 17, 32, 0.82);
-  --nav-border: rgba(118, 168, 255, 0.34);
-  --nav-shadow: 0 14px 40px rgba(2, 10, 20, 0.5);
-  --control-bg: rgba(14, 31, 54, 0.75);
-  --control-bg-soft: rgba(14, 31, 54, 0.48);
-  --control-hover-bg: rgba(22, 45, 74, 0.88);
-  --accent-control-bg: rgba(98, 240, 213, 0.08);
-  --accent-control-hover-bg: rgba(98, 240, 213, 0.16);
-  --active-nav-bg: rgba(34, 128, 235, 0.22);
-  --active-nav-border: rgba(69, 162, 255, 0.6);
-  --drawer-backdrop: rgba(0, 0, 0, 0.45);
-  --panel-header-bg: rgba(8, 22, 40, 0.95);
-  --media-shell-bg: rgba(2, 8, 15, 0.78);
-  --modal-overlay-bg: rgba(2, 8, 15, 0.86);
-  --input-bg: rgba(14, 31, 54, 0.7);
-  --focus-border: rgba(98, 240, 213, 0.58);
-  --focus-ring: 0 0 0 1px rgba(98, 240, 213, 0.35);
-  --elevated-shadow: 0 20px 55px rgba(3, 10, 21, 0.65);
-  --card-hover-shadow: 0 16px 34px rgba(3, 10, 21, 0.55);
-
-  font-family: 'Space Grotesk', 'Segoe UI', sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  --bg-900: #101b1b;
+  --bg-800: #152222;
+  --bg-700: #203333;
+  --surface-900: #152222;
+  --surface-800: #1b2b2b;
+  --text-100: #edf2e8;
+  --text-300: #abbeb5;
+  --accent-300: #87d9c0;
+  --accent-400: #b8e9d8;
+  --accent-500: #284b43;
+  --highlight: #d7ed83;
+  --highlight-ink: #152b2b;
+  --primary-bg: #87d9c0;
+  --primary-hover-bg: #b8e9d8;
+  --primary-text: #152b2b;
+  --line-700: #334a45;
+  --line-500: #638279;
+  --control-bg: #203333;
+  --control-bg-soft: #152222;
+  --control-hover-bg: #28413b;
+  --active-nav-bg: #284b43;
+  --active-nav-border: #87d9c0;
+  --accent-control-bg: #203b33;
+  --accent-control-hover-bg: #284b43;
+  --nav-bg: #101b1b;
+  --nav-bg-scrolled: #101b1b;
+  --nav-border: #334a45;
+  --drawer-backdrop: #00000099;
+  --panel-header-bg: #203333;
+  --media-shell-bg: #203333;
+  --modal-overlay-bg: #000000bb;
+  --input-bg: #101b1b;
+  --focus-border: #d7ed83;
+  --focus-ring: 0 0 0 3px #d7ed83;
+  --elevated-shadow: 0 12px 35px #00000022;
+  --card-hover-shadow: 0 12px 30px #00000022;
   color: var(--text-100);
-  background-color: var(--bg-900);
+  background: var(--bg-900);
+  font-family: "Space Grotesk", "Segoe UI", sans-serif;
+  line-height: 1.6;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
-
 .light {
-  --bg-900: #f7fbff;
-  --bg-800: #edf4fb;
-  --bg-700: #d9e8f6;
-  --surface-900: rgba(255, 255, 255, 0.96);
-  --surface-800: rgba(249, 252, 255, 0.98);
-  --line-700: rgba(31, 86, 148, 0.28);
-  --line-500: rgba(31, 86, 148, 0.44);
-  --text-100: #101827;
-  --text-300: #334963;
-  --accent-400: #155db5;
-  --accent-500: #0f4fa3;
-  --accent-300: #006f63;
-  --primary-bg: #0f4fa3;
-  --primary-hover-bg: #155db5;
+  --bg-900: #f8f7f1;
+  --bg-800: #e9eee5;
+  --bg-700: #e0e8db;
+  --surface-900: #fffef9;
+  --surface-800: #e9eee5;
+  --text-100: #102622;
+  --text-300: #344b43;
+  --accent-300: #07534b;
+  --accent-400: #043f39;
+  --accent-500: #d2e4d8;
+  --highlight: #d7ed83;
+  --highlight-ink: #102622;
+  --primary-bg: #07534b;
+  --primary-hover-bg: #043f39;
   --primary-text: #ffffff;
-  --page-glow-primary: rgba(42, 126, 218, 0.14);
-  --page-glow-secondary: rgba(5, 125, 112, 0.09);
-  --nav-bg: rgba(255, 255, 255, 0.86);
-  --nav-bg-scrolled: rgba(248, 252, 255, 0.94);
-  --nav-border: rgba(31, 86, 148, 0.3);
-  --nav-shadow: 0 14px 34px rgba(42, 78, 116, 0.18);
-  --control-bg: rgba(245, 250, 255, 0.92);
-  --control-bg-soft: rgba(255, 255, 255, 0.86);
-  --control-hover-bg: rgba(225, 238, 252, 0.96);
-  --accent-control-bg: rgba(0, 111, 99, 0.1);
-  --accent-control-hover-bg: rgba(0, 111, 99, 0.18);
-  --active-nav-bg: rgba(21, 93, 181, 0.12);
-  --active-nav-border: rgba(21, 93, 181, 0.48);
-  --drawer-backdrop: rgba(16, 24, 39, 0.28);
-  --panel-header-bg: rgba(237, 244, 251, 0.96);
-  --media-shell-bg: rgba(245, 250, 255, 0.96);
-  --modal-overlay-bg: rgba(16, 24, 39, 0.34);
-  --input-bg: rgba(255, 255, 255, 0.96);
-  --focus-border: rgba(0, 111, 99, 0.62);
-  --focus-ring: 0 0 0 1px rgba(0, 111, 99, 0.28);
-  --elevated-shadow: 0 20px 45px rgba(44, 82, 122, 0.18);
-  --card-hover-shadow: 0 16px 30px rgba(44, 82, 122, 0.16);
+  --line-700: #9bae9f;
+  --line-500: #526f61;
+  --control-bg: #e9eee5;
+  --control-bg-soft: #fffef9;
+  --control-hover-bg: #e0e8db;
+  --active-nav-bg: #d2e4d8;
+  --active-nav-border: #07534b;
+  --accent-control-bg: #e0e8db;
+  --accent-control-hover-bg: #d2e4d8;
+  --nav-bg: #f8f7f1;
+  --nav-bg-scrolled: #f8f7f1;
+  --nav-border: #9bae9f;
+  --drawer-backdrop: #10262255;
+  --panel-header-bg: #e0e8db;
+  --media-shell-bg: #e9eee5;
+  --modal-overlay-bg: #10262288;
+  --input-bg: #fffef9;
+  --focus-border: #07534b;
+  --focus-ring: 0 0 0 3px #07534b;
+  --elevated-shadow: 0 12px 35px #1026220b;
+  --card-hover-shadow: 0 12px 30px #10262212;
 }
-
 * {
   box-sizing: border-box;
 }
-
 html,
 body,
 #root {
   margin: 0;
   min-width: 320px;
   min-height: 100%;
-  background:
-    radial-gradient(circle at 8% 5%, var(--page-glow-primary), transparent 34%),
-    radial-gradient(circle at 88% 16%, var(--page-glow-secondary), transparent 36%),
-    linear-gradient(180deg, var(--bg-900), var(--bg-800));
+  background: var(--bg-900);
 }
-
 body {
-  overflow-x: hidden;
+  color: var(--text-100);
 }
-
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
 a {
   color: inherit;
   text-decoration: none;
 }
-
-button,
-input,
-textarea {
-  font-family: inherit;
+button {
+  cursor: pointer;
 }
-
-.code-font {
-  font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+button:disabled {
+  cursor: not-allowed;
+}
+:where(button, a, input, textarea, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus-border);
+  outline-offset: 4px;
+}
+:where(h1, h2):focus {
+  outline: none;
+}
+::selection {
+  background: var(--highlight);
+  color: var(--highlight-ink);
+}
+.code-font,
+.mono,
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
 }

@@ -14,6 +14,7 @@ import { LuLayoutGrid, LuMenu, LuX } from "react-icons/lu";
 import { PortfolioStyleSelector } from "../../components/shared/PortfolioStyleSelector";
 import { ColorModeButton } from "../../components/ui/color-mode";
 import { profile } from "../../data/portfolio";
+import { isUsableContactEmail } from "../../utils/contact";
 import type { PortfolioShellProps } from "../types";
 
 function BusinessShell({
@@ -89,7 +90,14 @@ function BusinessShell({
       position="relative"
       isolation="isolate"
     >
-      <Link className="business-skip-link" href="#portfolio-main">
+      <Link
+        className="business-skip-link"
+        href="#portfolio-main"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById("portfolio-main")?.focus();
+        }}
+      >
         Skip to portfolio content
       </Link>
       <Box className="business-background" aria-hidden="true">
@@ -142,7 +150,7 @@ function BusinessShell({
               fontWeight={800}
               flex="none"
             >
-              NQH
+              NV
             </Box>
             <Box minW={0}>
               <Text
@@ -154,7 +162,7 @@ function BusinessShell({
                 {profile.name}
               </Text>
               <Text color="var(--text-300)" fontSize="xs" truncate>
-                Editorial casebook / {profile.role}
+                Analytics casebook / {profile.role}
               </Text>
             </Box>
           </Link>
@@ -321,13 +329,19 @@ function BusinessShell({
               {profile.location}
             </Text>
             <Link
-              href={`mailto:${profile.email}`}
+              href={getNavigationHref("contact")}
+              onClick={(event) => {
+                event.preventDefault();
+                navigate("contact");
+              }}
               color="var(--accent-300)"
               fontSize="sm"
               fontWeight={700}
               data-testid="business-header-contact"
             >
-              Contact
+              {isUsableContactEmail(profile.email, profile.contactPlaceholder)
+                ? "Contact"
+                : "Contact · coming soon"}
             </Link>
           </VStack>
         </Box>

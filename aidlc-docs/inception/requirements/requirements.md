@@ -1,175 +1,110 @@
-# Requirements
+# Student Analytics Portfolio — Requirements
 
-## Intent Analysis Summary
+## Intent analysis
 
-- **User Request**: Create reverse engineering documentation, turn the project into a reusable baseline portfolio template for students, prepare detailed GitHub Pages deployment instructions, and make the code easier to maintain, understand, and extend.
-- **Request Type**: Refactoring, documentation enhancement, deployment enablement, and lightweight testing.
-- **Scope Estimate**: System-wide frontend template refactor across app configuration, section data, shared utilities, documentation, and tests.
-- **Complexity Estimate**: Moderate to comprehensive because the work affects most portfolio sections and must remain beginner-friendly.
-- **Requirements Depth**: Standard/comprehensive hybrid. The project is static and low operational risk, but the template audience and broad refactor require explicit requirements.
+- User request: revamp the existing website using the Resume and Internship_Report documents in src/assets to represent a data analytics/data science student; create a distinctive theme while preserving core user experience; remove irrelevant old sections and their assets.
+- Request type: enhancement and owner/content replacement.
+- Scope: shared typed content, both presentation templates, navigation, styling, metadata, and asset cleanup.
+- Complexity/depth: moderate; standard requirements analysis.
+- Audience: university/admissions reviewers, internship recruiters, mentors, and peers.
+- Sources: `src/assets/Resume - Trần Nguyên Vũ.docx` and `src/assets/Internship_Report_Tran_Nguyen_Vu.docx`. Source details are documented in ../reverse-engineering/student-source-review.md.
 
-## User Decisions Incorporated
+## Resolved user decisions
 
-- Primary outcome: Refactor code, update documentation, and add lightweight tests.
-- Refactor depth: Comprehensive template refactor.
-- GitHub Pages base path: Prefer automatic derivation from GitHub repository metadata where possible.
-- Setup guide: Beginner-friendly full guide.
-- Example data: Keep the current owner content as realistic example data and clearly tell students what to replace.
-- Tests: Add lightweight smoke tests for rendering, navigation config, and key template data.
-- Security extension: Disabled.
-- Property-based testing extension: Disabled.
+| Topic | Answer | Requirement |
+| --- | --- | --- |
+| Internship dates | A | Use 1 June–31 August 2026 from the company report. |
+| Contact | X - put placeholder values first | Keep contact with visibly identifiable placeholder values; do not reuse the previous owner's channels. |
+| Security Baseline | B | Disabled; full extension rules are not loaded. |
+| Property-Based Testing | C | Disabled; full extension rules are not loaded. |
 
-## Functional Requirements
+All answers are complete and consistent. The user's "approve and continue" authorizes generating this document from the completed answers; the document was subsequently approved in chat with "approve and continue".
 
-### FR1: Preserve Existing Portfolio Experience
+## Functional requirements
 
-The portfolio must continue to render the current sections:
+### FR-01 — Student identity and positioning
 
-- Home
-- About
-- Education
-- Experience
-- Awards
-- Projects
-- Gallery
-- Videos
-- Skills
-- Contact
+Represent Trần Nguyên Vũ / Tran Nguyen Vu as a biology-specialized high-school student in Hanoi with interests in data science, applied mathematics, and sustainable development. Use English prose consistent with the sources. Describe internship and student accomplishments at their supported level; remove the former owner's identity, seniority, employers, qualifications, initials, external profiles, and personal story from visible content and metadata.
 
-The current content should remain available as realistic example data for students.
+### FR-02 — Distinctive analytics design
 
-### FR2: Extract Editable Portfolio Content
+Create an analytics field-notebook theme with warm ivory light surfaces, deep ink dark surfaces, teal accents, restrained chartreuse highlights, editorial headings, structured evidence cards, and subtle grid/data motifs. Give the default experience a cohesive redesign across sections, headers, controls, and project presentation. Use abstract or code-native graphics rather than the former owner's portrait or fabricated project screenshots. Label any explanatory sample chart as illustrative and avoid implying it contains real project results.
 
-Student-editable content must be moved out of JSX-heavy components into typed data/config modules. The refactor should include data modules for:
+### FR-03 — Core experience
 
-- Profile identity, summary, social links, contact email, location, and hero highlights.
-- Navigation and section order.
-- About metrics and paragraphs.
-- Education entries.
-- Experience entries.
-- Awards.
-- Projects.
-- Gallery images.
-- Videos.
-- Skill categories.
-- Certificate metadata.
+Preserve responsive desktop/mobile navigation, style selection between the existing two presentations, light/dark mode, single-page and section-view layouts, valid hash navigation, and saved display preferences. Both presentations must show the same student evidence. Keep the existing static React/Vite architecture and GitHub Pages compatibility.
 
-### FR3: Add Shared Types
+### FR-04 — Relevant content structure
 
-The project must include shared TypeScript types for portfolio data models so students can edit content with compiler guidance.
+Provide Home, About, Education, Analytics Experience, Selected Projects, Achievements, Skills & Learning, Leadership & Community, and Contact. Choose readable section labels and remove stale navigation entries. Leadership/community must have a clear presentation rather than being lost during removal of old sections. The exact component boundaries and section implementation will be defined in the later plan.
 
-### FR4: Centralize Navigation and Section IDs
+### FR-05 — Education
 
-Section IDs and labels must be defined once and reused by the app shell and navigation. This prevents the active section tracker and navigation menu from drifting apart.
+Show HUS High School for Gifted Students, Vietnam National University; biology-specialized study, September 2024–May 2027. Show SAT 1410 and IELTS 7.0 where useful. Omit blank GPA fields and unsupported university degrees. Do not imply graduation before May 2027.
 
-### FR5: Share Repeated Scroll Behavior
+### FR-06 — Analytics internship
 
-Repeated `scrollToSection` logic must be replaced by a shared utility or hook.
+Show Eastern Sun Vietnam, Data Analytics Intern, 1 June–31 August 2026. Summarize supervised factory production data preparation, schema consistency and corrupted-record checks, EDA, Python/Excel analysis, Tableau dashboards, bilingual slides, and stakeholder reporting. The resume's two identified data quality issues may be cited; do not invent efficiency, revenue, or production impact figures.
 
-### FR6: Improve Reusable UI Structure
+### FR-07 — Selected project evidence
 
-Where useful, repeated card and section patterns should be extracted into reusable components without making the project harder for beginners to read.
+- Energy Demand Forecasting: time-series exploration of consumption patterns, a Streamlit application, methodology write-up, and relevance to energy planning and supply stress. No unsupported forecast accuracy or fake demo link.
+- Disaster Tweet Classification: LightGBM with oversampling/embeddings, fine-tuned DistilBERT and Twitter-RoBERTa, resume-reported F1 0.84339 and rank 37 of 435 submissions. Identify it as competition evidence rather than production deployment.
+- SIM-LSE Data Analytics Challenge: Tableau sales/profitability analysis, discounts above 20% contributing to weak profitability, a 12-slide executive deck, and five recommendations.
 
-### FR7: Improve Accessibility Labels
+Present each project with its question, approach, tools, and supported outcome. Actual repositories, dashboards, notebooks, demos, or project screenshots are not supplied; do not create links purporting to be those artifacts.
 
-External icon links, project actions, gallery/certificate interactions, and navigation controls should have clear accessible names where currently missing or ambiguous.
+### FR-08 — Achievements and skills/coursework
 
-### FR8: Improve GitHub Pages Base Path Handling
+Show the VinUniversity 50% Talent Scholarship for Future Founders Bootcamp, valued at VND 25 million, and supported competition/leadership distinctions without duplication that overwhelms the page. Skills include Python, SQL, pandas, Excel, Tableau, Matplotlib, foundational scikit-learn, and relevant methods. Basic MySQL familiarity may be described as foundational. Present Google Data Analytics nine-course certificate and Kaggle Learn coursework using resume descriptions, with June–October 2026 periods. Do not show invented certificate scans or credential IDs. Include Vietnamese (native) and English (fluent).
 
-The project should support GitHub Pages deployment with minimal manual changes. The preferred implementation should derive or pass the repository name through GitHub Actions where possible, while still allowing local/default configuration.
+### FR-09 — Leadership and community
 
-### FR9: Produce Beginner-Friendly Setup Documentation
+Include basketball leadership (Top 4 of 16 teams), well-being event assistance in Singapore (150+ students; supporting 20 Vietnamese participants), student mentoring, and optional concise film-production experience. Frame these as communication, teamwork, and community engagement supported by the resume.
 
-The documentation must explain:
+### FR-10 — Placeholder contact
 
-- Required tools: Git, Node.js 20 or newer, npm, GitHub account.
-- How to fork or use the repository as a template.
-- How to clone the repository.
-- How to install dependencies.
-- How to run the development server.
-- Which files students should edit first.
-- How to replace images, logos, certificates, links, and contact email.
-- How GitHub Pages deployment works.
-- How to enable GitHub Pages with GitHub Actions.
-- How to verify the deployed website.
-- How to troubleshoot failed builds, wrong base paths, missing assets, and 404 errors.
+Keep a contact area with visibly marked placeholder values such as `student.email@example.com`; personal social/profile fields may use plain placeholder text. Use a reserved example domain, not another person's real email or guessed profile. Keep contact controls inactive where destinations are placeholders, with readable text explaining that details are coming soon. No fake success state, nonworking social link, or form submitting to a placeholder recipient. Make later replacement with real student details straightforward in shared content configuration.
 
-### FR10: Clean Student-Facing README
+### FR-11 — Resume access and metadata
 
-The README must become student-first and remove leftover Vite starter content that is not useful for the portfolio template.
+Replace the former owner's resume download with the supplied student resume. A valid DOCX download is acceptable; labels and filename must accurately describe its format. Update page title, description, favicon/brand mark, and accessible identity labels for the student. Retain the internship report as a source file; publicly linking that report is not required by this request.
 
-### FR11: Add Lightweight Tests
+### FR-12 — Remove irrelevant content and assets
 
-The project must add lightweight automated tests covering:
+Remove old gallery photos, journal entries, videos, university/professional experience, project covers, certificates, and owner-specific logos/documents that are not relevant to the student. Remove their visible sections and unused content/assets, rather than merely restyling obsolete claims. Confirm references before deletion, preserve both supplied DOCX files, and keep any shared UI assets needed by retained features. The append-only audit remains historical evidence and is not a content cleanup target. Shared capabilities are retained only when useful to the resulting experience; stale sections must not remain available through active routes.
 
-- Basic app rendering.
-- Navigation/section configuration integrity.
-- Key template data validity such as required profile fields, links, and unique section IDs.
+## Non-functional requirements
 
-### FR12: Preserve Static Hosting Model
+- NFR-01 Accessibility: readable text and controls in both color modes, visible keyboard focus, semantic headings, useful alternative text, accessible mobile controls, and reduced-motion support. Target WCAG AA text contrast where applicable.
+- NFR-02 Responsiveness: usable from a 320px viewport through desktop; no horizontal overflow from headings, navigation, cards, or placeholder contact values.
+- NFR-03 Performance: keep the static delivery model; use lightweight visual assets/code-native graphics; avoid new runtime charting services or large libraries for decorative visuals.
+- NFR-04 Maintainability: shared typed student data remains authoritative for both templates, with straightforward placeholder replacement and no duplicated inconsistent biography/project facts.
+- NFR-05 Reliability: meaningful existing tests, TypeScript/Vite build, and ESLint pass after content/routing changes. Missing optional evidence does not create broken links or blank previews.
+- NFR-06 Compatibility: static root/project GitHub Pages base paths and retained navigation/preferences remain supported; no backend or deployment changes are necessary.
 
-The site must remain a static frontend application with no backend, database, or secret runtime requirements.
+## Acceptance criteria
 
-## Non-Functional Requirements
+1. Both presentations show the student's identity, high-school status, and supported source facts; no former-owner contact, portrait, project, employer, qualification, certificate, or writing is shown.
+2. The internship uses 1 June–31 August 2026; blank GPA and unsupported outcome figures are omitted.
+3. The three analytics projects communicate their methods and evidence, including the resume-reported F1/rank and Tableau findings accurately.
+4. Coursework and leadership/community evidence appear without fake downloadable certificates or project links.
+5. The default presentation visibly uses the new analytics design across all retained sections; light and dark modes are coherent and readable.
+6. Desktop/mobile navigation, retained section hashes, style switching, layout switching, and saved preferences work; removed sections cannot expose stale owner evidence.
+7. Contact uses recognizable placeholders; actions cannot send mail or navigate to guessed student profiles. Resume download resolves to the student's supplied file with an accurate format label.
+8. Obsolete assets and their imports are removed; both DOCX sources remain; no build references point to deleted files.
+9. At mobile and desktop sizes, content remains usable without horizontal overflow; keyboard focus and reduced motion are supported.
+10. Applicable tests, lint, and production build pass; visual/interaction verification results and any tooling limits are recorded in construction documentation.
 
-### NFR1: Maintainability
-
-Students should be able to update most portfolio content by editing data files rather than component layout files.
-
-### NFR2: Beginner Readability
-
-Abstractions must stay simple and discoverable. The code should favor clear names, typed data, and small helpers over complex framework patterns.
-
-### NFR3: Deployment Reliability
-
-`npm run build` must continue to produce a deployable `dist/` folder. The GitHub Actions workflow must remain compatible with GitHub Pages.
-
-### NFR4: Type Safety
-
-The refactor must preserve strict TypeScript checks and use shared types to catch common student editing mistakes.
-
-### NFR5: Documentation Quality
-
-Setup and deployment instructions must be clear enough for students who are new to GitHub Pages and Vite.
-
-### NFR6: Testability
-
-The added tests should run with a simple npm script and not require browser automation or external network calls.
-
-### NFR7: Accessibility
-
-The refactor should improve obvious accessible-name gaps without requiring a full accessibility redesign.
-
-### NFR8: Minimal Operational Complexity
-
-The project should not add backend services, databases, paid services, or deployment secrets.
-
-## Out of Scope
-
-- Replacing the visual design theme.
-- Adding a backend contact form service.
-- Adding CMS integration.
-- Adding analytics.
-- Adding property-based testing.
-- Enforcing additional security extension rules.
-- Migrating away from React, Vite, Chakra UI, or GitHub Pages.
-
-## Extension Rule Compliance
+## Extension compliance
 
 | Extension | Status | Rationale |
-|---|---|---|
-| Security Baseline | Disabled | User selected option B to skip security extension rules. |
-| Property-Based Testing | Disabled | User selected option C to skip PBT rules. |
+| --- | --- | --- |
+| Security Baseline | N/A | User explicitly opted out (Question 3: B); enforcement skipped and full rules not loaded. |
+| Property-Based Testing | N/A | User explicitly opted out (Question 4: C); enforcement skipped and full rules not loaded. |
 
-## Acceptance Criteria
+Ordinary accessibility, valid-link behavior, and existing build/test checks remain part of this website's requirements independent of extension choices.
 
-- The app still builds successfully with `npm run build`.
-- The app has a test command and lightweight tests for app rendering/config/data.
-- Portfolio content is moved into typed data/config files.
-- Navigation section IDs are centralized and reused.
-- Repeated scrolling logic is shared.
-- Current content remains as example template data.
-- README is rewritten for student template usage.
-- GitHub Pages setup/deployment guide is detailed and beginner-friendly.
-- Deployment base path handling is easier for student forks and works in GitHub Actions.
-- No application code is placed in `aidlc-docs/`.
+## Next-stage recommendation
+
+Include a concise User Stories stage because this request changes navigation, project presentation, placeholder contact behavior, and multiple visitor interactions. Keep later planning/design proportional to one existing frontend application. Requirements approval is complete; implementation still awaits the later approved execution and code-generation plans.

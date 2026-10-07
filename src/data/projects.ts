@@ -1,89 +1,62 @@
 import type { ProjectEntry } from "../types/portfolio";
 
-import courseworkCertificatesImage from "../assets/projects/coursework_and_certificates.png";
-import javaResumeApplicationImage from "../assets/projects/java_resume_application.png";
-import programAnalyzerImage from "../assets/projects/program_analyzer.png";
-
 export const projects = [
   {
-    id: "coursework-certificates",
-    title: "Coursework and Certificates",
+    id: "energy-forecasting",
+    title: "Energy Demand Forecasting",
     description:
-      "A curated academic archive covering everything I have learnt over the years.",
-    image: courseworkCertificatesImage,
-    imageAlt:
-      "Coursework and Certificates screenshot listing deep learning, machine learning, natural language processing, and reinforcement learning courses",
-    logoKey: "jupyter",
-    logoLabel: "Jupyter Notebook project logo",
-    logoAccent: "#f37626",
+      "Exploring how historical energy consumption can support planning for periods of supply stress.",
+    question:
+      "How can past consumption patterns help us prepare for future energy demand?",
+    approach:
+      "Time-series analysis, model development, and an interactive Streamlit application, accompanied by a methodology write-up.",
+    outcome:
+      "A forecasting exploration and interactive application connecting analytical methods to energy planning, extreme weather, and the risks of shortages.",
+    period: "Jun – Sep 2026",
+    category: "TIME SERIES · SUSTAINABILITY",
+    logoKey: "python",
+    logoLabel: "Python",
+    technologies: ["Python", "Time-series analysis", "Streamlit"],
+    actions: [],
+  },
+  {
+    id: "disaster-tweets",
+    title: "Finding Signal in Disaster Tweets",
+    description:
+      "Classifying genuine disaster-related tweets in Kaggle’s NLP with Disaster Tweets competition.",
+    question:
+      "Can a model distinguish a real disaster report from everyday language?",
+    approach:
+      "Iterated from LightGBM with RandomOverSampler and sentence embeddings to fine-tuned DistilBERT and Twitter-RoBERTa.",
+    outcome:
+      "F1 score of 0.84339; ranked 37th out of 435 submissions, as reported in my resume.",
+    period: "Jul – Sep 2026",
+    category: "NATURAL LANGUAGE PROCESSING",
+    logoKey: "scikitlearn",
+    logoLabel: "Machine learning",
     technologies: [
-      "Jupyter Notebook",
-      "Python",
-      "PyTorch",
-      "AWS",
-      "Kubernetes",
+      "LightGBM",
+      "Sentence embeddings",
+      "DistilBERT",
+      "Twitter-RoBERTa",
     ],
-    actions: [
-      {
-        label: "Repository",
-        href: "https://github.com/nhamhung/Coursework-and-Certificates",
-        ariaLabel: "Open Coursework and Certificates repository",
-      },
-      {
-        label: "README",
-        href: "https://github.com/nhamhung/Coursework-and-Certificates#readme",
-        ariaLabel: "Read Coursework and Certificates repository README",
-      },
-    ],
+    actions: [],
   },
   {
-    id: "program-analyzer",
-    title: "Program Analyzer",
+    id: "commerce-analytics",
+    title: "The Cost of a Discount",
     description:
-      "A C++ static program analyzer built to answer developers' queries about source-code relationships.",
-    image: programAnalyzerImage,
-    imageAlt:
-      "Program Analyzer architecture diagram connecting the user, SPA, source processor, query processor, design extractor, and program knowledge base",
-    logoKey: "cplusplus",
-    logoLabel: "C++ project logo",
-    logoAccent: "#659ad2",
-    technologies: ["C++", "Static Analysis", "Query Engine", "Team Project"],
-    actions: [
-      {
-        label: "Repository",
-        href: "https://github.com/nhamhung/Program-Analyzer",
-        ariaLabel: "Open Program Analyzer repository",
-      },
-      {
-        label: "README",
-        href: "https://github.com/nhamhung/Program-Analyzer#readme",
-        ariaLabel: "Read Program Analyzer repository README",
-      },
-    ],
-  },
-  {
-    id: "java-resume-application",
-    title: "Java Resume Application",
-    description:
-      "A Java desktop application for managing, customizing, and exporting resume versions from a centralized command-line workflow.",
-    image: javaResumeApplicationImage,
-    imageAlt:
-      "Java Resume Application screenshot showing a desktop interface for profile data, tasks, experience entries, and resume details",
-    logoKey: "openjdk",
-    logoLabel: "Java project logo",
-    logoAccent: "#e76f00",
-    technologies: ["Java", "JavaFX", "Gradle", "JUnit 5", "PDFBox"],
-    actions: [
-      {
-        label: "Repository",
-        href: "https://github.com/nhamhung/Java-Resume-Application",
-        ariaLabel: "Open Java Resume Application repository",
-      },
-      {
-        label: "README",
-        href: "https://github.com/nhamhung/Java-Resume-Application/blob/master/README.adoc",
-        ariaLabel: "Read Java Resume Application README",
-      },
-    ],
+      "A Tableau-led investigation of e-commerce profitability for the SIM-LSE Data Analytics Challenge.",
+    question: "When does a sales discount stop being good business?",
+    approach:
+      "Analyzed profit margins across time, geography, customer segments, discounts, and product categories.",
+    outcome:
+      "Identified discounts above 20% as a major contributor to weak profitability. Co-developed a 12-slide executive pitch with five pricing and segmentation recommendations.",
+    period: "Jun – Jul 2026",
+    category: "BUSINESS INTELLIGENCE",
+    logoKey: "tableau",
+    logoLabel: "Tableau",
+    technologies: ["Tableau", "Profitability analysis", "Data storytelling"],
+    actions: [],
   },
 ] satisfies ProjectEntry[];

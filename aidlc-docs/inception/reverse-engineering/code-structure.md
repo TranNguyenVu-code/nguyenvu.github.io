@@ -1,139 +1,138 @@
 # Code Structure
 
-## Build System
+## Build system
 
-- **Type**: npm scripts with Vite and TypeScript project references.
-- **Configuration**:
-  - `package.json` defines `dev`, `test`, `build`, `lint`, and `preview`.
-  - `vite.config.ts` configures React SWC, Tailwind CSS, TypeScript paths, Vitest, and an environment-driven base path.
-  - `tsconfig.app.json` enables strict TypeScript checks for application and test code.
-  - `eslint.config.ts` configures base JavaScript, TypeScript, React, and Prettier compatibility.
-  - `.github/workflows/deploy.yml` derives the GitHub Pages base path and deploys `dist/`.
+npm scripts: `dev` (Vite), `test` (Vitest), `lint` (ESLint), `build` (TypeScript project build and Vite), and `preview` (built site). Strict TypeScript uses app/node project configurations. Vite configures React SWC, Tailwind, aliases, jsdom, and `VITE_BASE_PATH`.
 
-## Module Hierarchy
+## Module hierarchy
 
-```mermaid
-flowchart TD
-    Main["src/main.tsx"]
-    Provider["UI Provider"]
-    App["App Shell"]
-    Selector["Shared Style Selector"]
-    Registry["Template Registry"]
-    Templates["Engineering, Neutral, and Business Templates"]
-    Sections["Section Components"]
-    Hooks["Layout Hook"]
-    Utils["Scroll, Journal, Media, and Animation Utilities"]
-    Data["Typed Data Modules"]
-    Content["Journal Markdown"]
-    Assets["Static Assets"]
+`main.tsx` -> UI provider -> App -> template registry and layout hook -> shells/sections -> typed data -> Markdown/assets.
+Text hierarchy is used as a parsing-safe diagram alternative.
 
-    Main --> Provider
-    Provider --> App
-    App --> Selector
-    App --> Registry
-    App --> Hooks
-    Registry --> Templates
-    Templates --> Sections
-    Sections --> Data
-    Sections --> Utils
-    Data --> Content
-    Data --> Assets
-```
+## Patterns
 
-### Text Alternative
+- Registry/strategy: two presentation choices share one portfolio model.
+- Typed content: `satisfies` checks content against `src/types/portfolio.ts`.
+- Hash navigation: static-host-compatible continuous or section layouts.
+- Shared actions/UI: resume, external links, color mode, and selection primitives.
+- Browser persistence: guarded reads/writes retain preferences when storage works and fall back safely when unavailable.
 
-`main.tsx` mounts the provider and App. App owns the active runtime template and uses the layout hook, selection utility, and template registry. Each template supplies its shell and maps section IDs to components. Components consume typed data and utilities; data modules import journal Markdown and static assets.
+## Existing files inventory
 
-## Existing Files Inventory
+- `src/App.css` — content, types, entrypoint, or styling
+- `src/App.test.tsx` — automated verification
+- `src/App.tsx` — content, types, entrypoint, or styling
+- `src/assets/Internship_Report_Tran_Nguyen_Vu.docx` — bundled source document
+- `src/assets/Resume - Trần Nguyên Vũ.docx` — bundled source document
+- `src/assets/certificates/aiximpact-certificate.pdf` — bundled media/document
+- `src/assets/certificates/aiximpact-final-presentation.pdf` — bundled media/document
+- `src/assets/certificates/aws-cloud-practitioner.pdf` — bundled media/document
+- `src/assets/certificates/certified-kubernetes-application-developer.pdf` — bundled media/document
+- `src/assets/certificates/coursera-mmpg2mrcsjrt.pdf` — bundled media/document
+- `src/assets/certificates/database-system-focus-area.pdf` — bundled media/document
+- `src/assets/certificates/nus-top-student-for-big-data-systems.pdf` — bundled media/document
+- `src/assets/certificates/university.pdf` — bundled media/document
+- `src/assets/documents/resume.pdf` — bundled media/document
+- `src/assets/nus.png` — bundled media/document
+- `src/assets/nus.svg` — bundled media/document
+- `src/assets/photo_1.jpg` — bundled media/document
+- `src/assets/photo_2.jpg` — bundled media/document
+- `src/assets/photo_3.jpg` — bundled media/document
+- `src/assets/photo_4.HEIC` — bundled media/document
+- `src/assets/photo_4.jpg` — bundled media/document
+- `src/assets/photo_5.jpg` — bundled media/document
+- `src/assets/photo_6.jpg` — bundled media/document
+- `src/assets/photo_7.jpg` — bundled media/document
+- `src/assets/photo_8.jpg` — bundled media/document
+- `src/assets/profile.jpeg` — bundled media/document
+- `src/assets/projects/coursework_and_certificates.png` — bundled media/document
+- `src/assets/projects/java_resume_application.png` — bundled media/document
+- `src/assets/projects/program_analyzer.png` — bundled media/document
+- `src/assets/react.svg` — bundled media/document
+- `src/assets/sa.png` — bundled media/document
+- `src/assets/ut.png` — bundled media/document
+- `src/assets/zhonghua.jpg` — bundled media/document
+- `src/components/About.tsx` — shared UI or section presentation
+- `src/components/Awards.tsx` — shared UI or section presentation
+- `src/components/Contact.tsx` — shared UI or section presentation
+- `src/components/Education.tsx` — shared UI or section presentation
+- `src/components/Experience.tsx` — shared UI or section presentation
+- `src/components/Gallery.tsx` — shared UI or section presentation
+- `src/components/Hero.tsx` — shared UI or section presentation
+- `src/components/Journal.tsx` — shared UI or section presentation
+- `src/components/JournalPostPage.tsx` — shared UI or section presentation
+- `src/components/Navbar.tsx` — shared UI or section presentation
+- `src/components/Projects.tsx` — shared UI or section presentation
+- `src/components/Skills.tsx` — shared UI or section presentation
+- `src/components/shared/ContentCard.tsx` — shared UI or section presentation
+- `src/components/shared/ExternalAction.tsx` — shared UI or section presentation
+- `src/components/shared/LogoMark.tsx` — shared UI or section presentation
+- `src/components/shared/PortfolioStyleSelector.tsx` — shared UI or section presentation
+- `src/components/shared/SectionShell.tsx` — shared UI or section presentation
+- `src/components/ui/color-mode-utils.ts` — shared UI or section presentation
+- `src/components/ui/color-mode.tsx` — shared UI or section presentation
+- `src/components/ui/provider.tsx` — shared UI or section presentation
+- `src/components/ui/toaster-instance.ts` — shared UI or section presentation
+- `src/components/ui/toaster.tsx` — shared UI or section presentation
+- `src/components/ui/tooltip.tsx` — shared UI or section presentation
+- `src/content/journal/first-local-journal.md` — content, types, entrypoint, or styling
+- `src/data/about.ts` — portfolio content/configuration
+- `src/data/awards.ts` — portfolio content/configuration
+- `src/data/blog.ts` — portfolio content/configuration
+- `src/data/certificates.ts` — portfolio content/configuration
+- `src/data/education.ts` — portfolio content/configuration
+- `src/data/experience.ts` — portfolio content/configuration
+- `src/data/gallery.ts` — portfolio content/configuration
+- `src/data/journalPosts.ts` — portfolio content/configuration
+- `src/data/navigation.ts` — portfolio content/configuration
+- `src/data/portfolio.ts` — portfolio content/configuration
+- `src/data/profile.ts` — portfolio content/configuration
+- `src/data/projects.ts` — portfolio content/configuration
+- `src/data/sectionContent.ts` — portfolio content/configuration
+- `src/data/skills.ts` — portfolio content/configuration
+- `src/data/template.ts` — portfolio content/configuration
+- `src/data/videos.ts` — portfolio content/configuration
+- `src/hooks/usePortfolioLayout.test.ts` — automated verification
+- `src/hooks/usePortfolioLayout.ts` — navigation/state behavior
+- `src/index.css` — content, types, entrypoint, or styling
+- `src/main.tsx` — content, types, entrypoint, or styling
+- `src/templates/business/BusinessAbout.tsx` — template presentation/registry
+- `src/templates/business/BusinessAwards.tsx` — template presentation/registry
+- `src/templates/business/BusinessContact.tsx` — template presentation/registry
+- `src/templates/business/BusinessDetailList.tsx` — template presentation/registry
+- `src/templates/business/BusinessEducation.tsx` — template presentation/registry
+- `src/templates/business/BusinessExperience.tsx` — template presentation/registry
+- `src/templates/business/BusinessGallery.tsx` — template presentation/registry
+- `src/templates/business/BusinessHero.tsx` — template presentation/registry
+- `src/templates/business/BusinessJournal.tsx` — template presentation/registry
+- `src/templates/business/BusinessJournalPostPage.tsx` — template presentation/registry
+- `src/templates/business/BusinessProjects.tsx` — template presentation/registry
+- `src/templates/business/BusinessSectionHeading.tsx` — template presentation/registry
+- `src/templates/business/BusinessShell.tsx` — template presentation/registry
+- `src/templates/business/BusinessSkills.tsx` — template presentation/registry
+- `src/templates/business/business.css` — template presentation/registry
+- `src/templates/business/businessTemplate.test.tsx` — automated verification
+- `src/templates/business/index.ts` — template presentation/registry
+- `src/templates/engineering/EngineeringShell.tsx` — template presentation/registry
+- `src/templates/engineering/index.ts` — template presentation/registry
+- `src/templates/index.ts` — template presentation/registry
+- `src/templates/journalPostPages.test.tsx` — automated verification
+- `src/templates/options.ts` — template presentation/registry
+- `src/templates/templateRegistry.test.ts` — automated verification
+- `src/templates/types.ts` — template presentation/registry
+- `src/test/data/navigation.test.ts` — automated verification
+- `src/test/data/portfolio.test.ts` — automated verification
+- `src/test/setup.ts` — automated verification
+- `src/themeAccessibility.test.ts` — automated verification
+- `src/types/portfolio.ts` — content, types, entrypoint, or styling
+- `src/utils/animation.ts` — utility behavior
+- `src/utils/contact.ts` — utility behavior
+- `src/utils/journal.ts` — utility behavior
+- `src/utils/media.ts` — utility behavior
+- `src/utils/scroll.ts` — utility behavior
+- `src/utils/templateSelection.test.ts` — automated verification
+- `src/utils/templateSelection.ts` — utility behavior
 
-### Application and Styling
-- `src/main.tsx` - React entrypoint and provider mount.
-- `src/App.tsx` - Template, navigation, layout, and journal route orchestration.
-- `src/App.css` - Template-scoped variables, backgrounds, and shared animations.
-- `src/index.css` - Global variables, document styles, font import, and color mode values.
+## Critical dependencies
 
-### Templates
-- `src/data/template.ts` - Student-editable initial template selection.
-- `src/templates/types.ts` - Template ID, shell, journal, chapter, and complete section-map contracts.
-- `src/templates/index.ts` - Three-template registry, source-default compatibility export, resolution, and fallback.
-- `src/templates/engineering/index.ts` - Engineering section mapping.
-- `src/templates/engineering/EngineeringShell.tsx` - Engineering shell and Navbar integration.
-- `src/templates/neutral/*` - Neutral magazine shell plus editorial Hero, About, and Projects.
-- `src/templates/business/*` - Business report shell plus executive Hero, About, and Projects.
-
-### Shared and Baseline Components
-- `src/components/Navbar.tsx` - Engineering fixed desktop/mobile navigation and display controls.
-- `src/components/Hero.tsx` - Engineering hero.
-- `src/components/About.tsx` - Biography and metrics.
-- `src/components/Education.tsx` - Education records.
-- `src/components/Experience.tsx` - Experience timeline.
-- `src/components/Awards.tsx` - Awards and recognitions.
-- `src/components/Projects.tsx` - Engineering project cards.
-- `src/components/Gallery.tsx` - Engineering media gallery and preview.
-- `src/components/Journal.tsx` - Combined local and external writing cards.
-- `src/components/JournalPostPage.tsx` - Local post detail and not-found states.
-- `src/components/Skills.tsx` - Skills and certificate previews.
-- `src/components/Contact.tsx` - Contact form and social actions.
-- `src/components/shared/PortfolioStyleSelector.tsx` - Shared runtime template menu used by all three shell headers.
-- `src/components/shared/*` - Shared section, card, action, logo, and template-selection primitives.
-- `src/components/ui/*` - Chakra provider, color mode, tooltip, and toaster helpers.
-
-### Data, Content, Types, and Utilities
-- `src/data/*.ts` - Typed student-editable profile, navigation, career, project, media, writing, skill, certificate, and template configuration.
-- `src/content/journal/*.md` - Local journal article bodies.
-- `src/types/portfolio.ts` - Shared content and section contracts.
-- `src/hooks/usePortfolioLayout.ts` - Layout persistence, hash parsing, and section navigation.
-- `src/utils/scroll.ts` - Enabled-navigation filtering, active-section tracking, and smooth scrolling.
-- `src/utils/journal.ts` - Local journal route creation and parsing.
-- `src/utils/media.ts` - YouTube URL helpers.
-- `src/utils/animation.ts` - Staggered reveal class selection.
-- `src/utils/templateSelection.ts` - Typed template-ID validation and guarded browser persistence.
-
-### Tests and Delivery
-- `src/App.test.tsx` - App rendering, runtime template selection, persistence, route, layout, navigation, and journal tests.
-- `src/test/data/navigation.test.ts` - Section/navigation configuration tests.
-- `src/test/data/portfolio.test.ts` - Portfolio content and link validation tests.
-- `src/hooks/usePortfolioLayout.test.ts` - Layout helper tests.
-- `src/templates/templateRegistry.test.ts` - Template resolution and section completeness tests.
-- `src/utils/templateSelection.test.ts` - Template validation, fallback, persistence, and storage-failure tests.
-- `.github/workflows/deploy.yml` - GitHub Pages deployment workflow.
-- `README.md` - Student customization and publishing manual.
-- `DEPLOYMENT.md` - Detailed deployment guidance.
-
-## Design Patterns
-
-### Registry, Strategy, and Runtime Selection
-- **Location**: `src/templates/`.
-- **Purpose**: Swap presentation while preserving one content model and current visitor context.
-- **Implementation**: Each `PortfolioTemplate` supplies a shell and complete section map; App derives a registry entry from validated runtime state and every shell emits typed choices through one selector.
-
-### Typed Content Configuration
-- **Location**: `src/data/` and `src/types/portfolio.ts`.
-- **Purpose**: Let students edit content without modifying presentation logic.
-- **Implementation**: Section data uses `satisfies` against shared TypeScript types and is aggregated by `portfolio.ts`.
-
-### Hash-Routed Static Navigation
-- **Location**: `src/hooks/usePortfolioLayout.ts`, `src/utils/journal.ts`, and `src/App.tsx`.
-- **Purpose**: Support direct links and multiple layout modes on GitHub Pages without a server router.
-- **Implementation**: Anchor hashes represent single-page sections; `#/section` and `#/journal/slug` represent routed views.
-
-### Shared Section and Action Primitives
-- **Location**: `src/components/shared/`.
-- **Purpose**: Keep recurring layout, links, logos, template selection, and accessibility behavior consistent.
-- **Implementation**: Shared React components receive typed props and CSS-variable styling.
-
-## Critical Dependencies
-
-- **React 19.2.0** - Component rendering, state, effects, and hooks.
-- **Chakra UI 3.30.0** - Responsive primitives, controls, drawers, dialogs, and styling props.
-- **Vite 7.2.4** - Development server, asset handling, testing integration, and production bundling.
-- **Vitest 4.1.9 and Testing Library 16.3.2** - Unit and DOM behavior tests.
-- **React Icons 5.5.0** - Navigation, action, social, and status iconography.
-
-## Maintainability Risks
-
-- The shared selector imports registry metadata while shells are registered by that same index; the current ESM cycle is render-safe but should be watched if template definitions gain module-level side effects.
-- Neutral and Business intentionally reuse several shared sections, so deep changes to those shared components affect all three presentations.
-- `SectionId` and `sectionIds` are maintained separately and require tests to prevent drift.
-- There are two ESLint configuration files, which can confuse contributors about the active configuration.
-- Template and layout preferences use separate local-storage keys and require regression tests whenever App ownership changes.
+React 19 renders stateful components; Chakra 3 supplies UI primitives and dialogs; next-themes supplies color mode; React Markdown renders local writing; Vite 7 builds the static artifact. Exact declared ranges are recorded in technology-stack.md.

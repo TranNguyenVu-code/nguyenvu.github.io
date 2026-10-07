@@ -1,52 +1,21 @@
-# Unit Test Execution Instructions
+# Unit Test Instructions — Student Analytics Portfolio
 
-## Purpose
-
-Run the deterministic tests that protect typed data, navigation, layout helpers, template selection, registry behavior, CSS isolation, and accessibility safeguards.
-
-## Run All Automated Tests
+## Commands
 
 ```bash
 npm run test
 ```
 
-Expected verified result:
+Current expected inventory: 9 files, 71 tests, zero failures. Verification evidence comprises the successful full 68-test run followed by the updated 31-test App run after three navigation/focus cases were added; the other 40 tests were unchanged. All 71 current cases passed across those applicable runs. Coverage collection is not configured, so no coverage percentage is asserted. Results are printed to the terminal; no permanent report file is configured.
 
-- 9 test files pass.
-- 88 tests pass.
-- 0 tests fail.
-
-Vitest reports results in the terminal. Coverage reporting is not configured, so no coverage percentage or report directory should be inferred.
-
-## Run the Unit-Oriented Group
+Run the unit-oriented group separately when investigating changes:
 
 ```bash
-npx vitest run src/utils/templateSelection.test.ts src/hooks/usePortfolioLayout.test.ts src/test/data/navigation.test.ts src/test/data/portfolio.test.ts src/templates/templateRegistry.test.ts src/themeAccessibility.test.ts
+npx vitest run src/utils/templateSelection.test.ts src/utils/contact.test.ts src/hooks/usePortfolioLayout.test.ts src/test/data/navigation.test.ts src/test/data/portfolio.test.ts src/templates/templateRegistry.test.ts src/themeAccessibility.test.ts
 ```
 
-Expected verified result: 6 files and 49 tests pass.
+These 7 files contain 38 current tests. They cover saved preference validation/storage failure, email/profile placeholder rejection and mail draft encoding, layout/hash helpers, retained section completeness, student facts, DOCX SHA-256 preservation, template registry alignment, and light/dark text/action/focus contrast. The remaining 33 rendered cases are described in integration-test-instructions.md.
 
-## Test Inventory
+## Failure handling
 
-| File                                     | Main responsibility                                                                                 |
-| ---------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `src/utils/templateSelection.test.ts`    | Source default, saved preference, invalid-value fallback, and storage failures                      |
-| `src/hooks/usePortfolioLayout.test.ts`   | Layout validation, hash parsing, route creation, fallback, and persistence                          |
-| `src/test/data/navigation.test.ts`       | Unique section IDs, labels, baseline availability, and visibility filtering                         |
-| `src/test/data/portfolio.test.ts`        | Beginner README, shared content, links, accessible media, resume facts, and certificates            |
-| `src/templates/templateRegistry.test.ts` | Two registered templates, visible selector options, complete section maps, and Engineering fallback |
-| `src/themeAccessibility.test.ts`         | Theme contrast, semantic contact colors, scoped selectors, control clearance, and reduced motion    |
-
-The remaining three files exercise rendered component integrations and are documented in `integration-test-instructions.md`.
-
-## Fixing a Failure
-
-1. Read the failing test name and first assertion message.
-2. Open the source file named in the stack trace.
-3. Correct the source or update the test only when the intended behavior changed.
-4. Rerun the focused file with `npx vitest run path/to/file.test.ts`.
-5. Rerun `npm run test` before considering the issue resolved.
-
-## When to Run
-
-Run the suite after changing shared data, assets, navigation, template availability, persistence, layouts, section names, theme components, or styling safeguards, and before publishing the site.
+Use the failing assertion and stack trace to locate the source. Correct unintended behavior; adjust assertions only for an intentional requirement change. Rerun the affected file, then broaden checks only when changes or unresolved concerns warrant it. Preserve both supplied DOCX inputs; never substitute altered documents to satisfy their hash assertions. Browser responsiveness and native focus behavior also require the documented browser checks.

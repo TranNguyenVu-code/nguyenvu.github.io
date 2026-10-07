@@ -1,53 +1,23 @@
 # Code Quality Assessment
 
-## Test Coverage
+## Verification status
 
-- **Overall**: Focused automated coverage; no measured line/branch percentage.
-- **Unit and Data Tests**: Navigation contracts, portfolio data, template registry, template-selection persistence, and layout helpers are covered.
-- **Integration/DOM Tests**: App rendering, all-three-style switching, persistence, layout switching, hash navigation, local journal detail, and not-found behavior are covered.
-- **End-to-End Tests**: Not configured.
-- **Latest Recorded Result**: 7 test files and 70 tests pass after the runtime template-selector implementation.
+Vitest/Testing Library tests cover App routes, style switching, saved preferences, navigation, layouts, registry contracts, portfolio data, Business presentation, journal pages, and color contrast. ESLint and strict TypeScript are configured. Tests, lint, and build have not been executed for this analysis-only stage; historical pass counts are not treated as current results. No coverage percentage was measured.
 
-## Code Quality Indicators
+## Strengths
 
-- **TypeScript Strictness**: Good. Strict mode and unused/fallthrough/side-effect checks are enabled.
-- **Linting**: Configured and passing at the latest recorded verification.
-- **Formatting**: Prettier is configured.
-- **Documentation**: Good for student customization and AI-DLC traceability, though reverse-engineering artifacts required this refresh.
-- **Accessibility**: Good labels, image alternatives, semantic menu radio items, keyboard-capable controls, focus treatment, reduced-motion styling, and stable test IDs.
-- **Maintainability**: Improved through typed data, shared utilities, shared UI primitives, and the template registry.
+Typed content and registry boundaries, guarded preference persistence, static-host-compatible routing, accessible dialog primitives, and responsive display controls support a focused redesign.
 
-## Good Patterns
+## Debt and redesign risks
 
-- Shared typed data supports all three templates without content duplication.
-- Template completeness is enforced by TypeScript and registry tests.
-- Hash routing avoids GitHub Pages rewrite dependencies.
-- Layout storage failures have safe fallbacks and tests.
-- Template storage uses typed validation, an Engineering fallback, and storage-failure tests.
-- Local and external writing use a discriminated union.
-- Resume and certificate assets are bundled through Vite.
-- Student-facing README instructions identify safe customization locations.
+- Source content, hardcoded initials, external writing links, and media still identify the template author.
+- `index.html` retains the Vite favicon and generic title.
+- Some hero actions call scrolling directly; their behavior must be verified in section layout.
+- Models require images/logos/email/certificate files that the student sources do not fully provide.
+- Legacy architecture notes contained a retired theme and a different workspace; this refresh corrects those references.
+- Both ESLint configuration files exist; avoid unrelated cleanup unless validation shows a problem.
+- Asset deletion must follow import/reference inspection so build and previews remain coherent.
 
-## Technical Debt and Risks
+## Validation planned for construction
 
-- The shared selector reads template metadata from the registry imported by the same shell graph; this render-safe ESM cycle should be revisited if template modules gain side effects.
-- Neutral and Business intentionally reuse several shared sections, so shared-component changes have a three-template regression surface.
-- `src/hooks/usePortfolioLayout.ts` deliberately gives every template the same single/multi-page and route model; future template-specific routing would require a new contract.
-- `src/App.css` and `src/index.css` contain substantial shared and template-scoped styling that require disciplined selector isolation.
-- No browser-level visual regression or end-to-end suite automatically verifies responsive composition or menu focus behavior.
-- Duplicate ESLint configs remain.
-
-## Runtime-Selector Constraints
-
-- Keep exactly Engineering, Neutral, and Business.
-- `src/data/template.ts` remains the first-visit source default.
-- Runtime choice must preserve route, journal, layout, and color-mode state.
-- Every responsive shell header must expose the same accessible choice.
-- Static hosting must remain free of backend, URL-selection, and selector-specific dependency requirements.
-
-## Recommended Next Improvements
-
-- Extract template display metadata from the registry graph if future module side effects make the current selector import cycle risky.
-- Add Playwright screenshot and keyboard-flow checks for all three responsive headers when browser automation is available.
-- Consolidate the duplicate ESLint configuration files.
-- Keep future presentation options within the existing shell/registry contract unless requirements justify a wider routing model.
+Source fidelity checks, TypeScript/Vite build, ESLint, applicable existing tests updated for student content, interaction checks across layout/theme modes, and desktop/mobile visual review where tooling permits.

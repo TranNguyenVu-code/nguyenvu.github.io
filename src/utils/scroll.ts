@@ -24,7 +24,18 @@ export const getEnabledSectionIds = (
 export const scrollToSection = (sectionId: SectionId): void => {
   const section = document.getElementById(sectionId);
 
-  section?.scrollIntoView({ behavior: "smooth" });
+  section?.scrollIntoView({
+    behavior: window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth",
+  });
+};
+
+// Sections use the same App-owned navigation as shell controls in either layout.
+export const navigateToSection = (sectionId: SectionId): void => {
+  window.dispatchEvent(
+    new CustomEvent("portfolio-navigate", { detail: sectionId }),
+  );
 };
 
 export const useActiveSection = (

@@ -11,13 +11,13 @@ export const portfolioTemplateOptions = {
     id: "engineering",
     label: "Engineering",
     description:
-      "A structured portfolio for technical projects, problem-solving, and the tools you are learning.",
+      "An analytical notebook of student projects, questions, and learning.",
   },
   business: {
     id: "business",
     label: "Business",
     description:
-      "An editorial casebook for experience, evidence, and selected work.",
+      "An editorial casebook of analytics experience and student evidence.",
   },
 } satisfies Record<PortfolioTemplateId, PortfolioTemplateOption>;
 

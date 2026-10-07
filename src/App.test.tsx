@@ -9,13 +9,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 
 import App, { PortfolioApp } from "./App";
 import { Provider } from "./components/ui/provider";
-import {
-  journalPosts,
-  navigation,
-  profile,
-  projects,
-  sectionContent,
-} from "./data/portfolio";
+import { navigation, profile, sectionContent } from "./data/portfolio";
 import { selectedTemplateId } from "./data/template";
 import { businessTemplate } from "./templates/business";
 import { engineeringTemplate } from "./templates/engineering";
@@ -119,16 +113,11 @@ describe("App smoke render", () => {
     ).toBeGreaterThan(0);
   });
 
-  it("renders school achievements with accessible school logos", () => {
+  it("renders the student scholarship with its source-backed value", () => {
     renderPortfolio();
 
-    expect(screen.getByText("Model Student Award")).toBeInTheDocument();
-    expect(
-      screen.getByText("Singapore Youth Festival Choir - Silver Award"),
-    ).toBeInTheDocument();
-    expect(
-      screen.getAllByRole("img", { name: "Zhonghua Secondary School logo" }),
-    ).toHaveLength(2);
+    expect(document.body.textContent).toContain("Future Founders");
+    expect(document.body.textContent).toContain("25 million");
   });
 
   it("renders student-editable descriptions below every non-home section heading", () => {
@@ -164,22 +153,6 @@ describe("App smoke render", () => {
     expect(document.getElementById("home")).toBeInTheDocument();
     expect(screen.getByTestId("about-section")).toBeInTheDocument();
     expect(screen.getByTestId("projects-section")).toBeInTheDocument();
-    expect(screen.getAllByText("IN_SITE").length).toBeGreaterThan(0);
-    expect(screen.getAllByText("WORDPRESS").length).toBeGreaterThan(0);
-    expect(screen.getByTestId("writing-image-local-0")).toHaveAttribute(
-      "data-image-fit",
-      "cover",
-    );
-    expect(screen.getByTestId("writing-image-frame-local-0")).toHaveAttribute(
-      "data-thumbnail-height",
-      "190px",
-    );
-    expect(
-      screen.getAllByTestId(/^writing-image-wordpress-/)[0],
-    ).toHaveAttribute("data-image-fit", "cover");
-    expect(
-      screen.getAllByTestId(/^writing-image-frame-wordpress-/)[0],
-    ).toHaveAttribute("data-thumbnail-height", "190px");
   });
 
   it("switches to multi-page mode and renders one selected page section", async () => {
@@ -248,48 +221,6 @@ describe("App smoke render", () => {
     expect(screen.queryByTestId("projects-section")).not.toBeInTheDocument();
   });
 
-  it("renders a local journal post from a direct GitHub Pages-safe hash", () => {
-    window.history.pushState(null, "", journalPosts[0].href);
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("journal-post-page")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { level: 1, name: journalPosts[0].title }),
-    ).toBeInTheDocument();
-    expect(screen.getByText("IN_SITE")).toBeInTheDocument();
-    expect(screen.getByTestId("journal-post-image")).toHaveAttribute(
-      "data-image-fit",
-      "contain",
-    );
-    expect(
-      screen.getByRole("heading", {
-        level: 2,
-        name: "Mentoring at the SIM–LSE Data Analytics Challenge 2026",
-      }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByText("SIM–LSE Data Analytics Challenge 2026", {
-        selector: "strong",
-      }),
-    ).toBeInTheDocument();
-    expect(screen.getByTestId("journal-post-back-link")).toHaveAttribute(
-      "href",
-      "#/journal",
-    );
-  });
-
-  it("renders a graceful fallback for an unknown local journal post hash", () => {
-    window.history.pushState(null, "", "#/journal/missing-post");
-
-    renderPortfolio();
-
-    expect(screen.getByTestId("journal-post-not-found")).toBeInTheDocument();
-    expect(
-      screen.getByRole("heading", { level: 1, name: "Journal post not found" }),
-    ).toBeInTheDocument();
-  });
-
   it.each([
     [
       "engineering",
@@ -343,20 +274,6 @@ describe("App smoke render", () => {
     },
   );
 
-  it.each([
-    [engineeringTemplate, "hero-resume-download"],
-    [businessTemplate, "business-hero-resume-download"],
-  ] as const)(
-    "keeps shared external actions clear of their borders",
-    (template, resumeActionId) => {
-      renderTemplate(template);
-
-      expect(screen.getByTestId(resumeActionId)).toHaveClass(
-        "portfolio-action-link",
-      );
-    },
-  );
-
   it("composes Business as an editorial casebook with sticky contents", () => {
     renderTemplate(businessTemplate);
 
@@ -375,40 +292,16 @@ describe("App smoke render", () => {
     expect(
       screen.getByTestId("business-contents-link-projects"),
     ).toBeInTheDocument();
-    expect(screen.getByText("Editorial casebook")).toBeInTheDocument();
+    expect(
+      screen.getByText(
+        "A structured record of work, study, and ongoing learning.",
+      ),
+    ).toBeInTheDocument();
     expect(
       screen.getByText(sectionContent.projects.eyebrow),
     ).toBeInTheDocument();
     expect(screen.queryByText("Executive brief")).not.toBeInTheDocument();
     expect(screen.queryByText("Reviewed evidence")).not.toBeInTheDocument();
-  });
-
-  it.each([["business", businessTemplate]] as const)(
-    "uses project-owned covers throughout the %s presentation",
-    (_templateId, template) => {
-      renderTemplate(template);
-
-      for (const project of projects) {
-        const projectImages = screen.getAllByRole("img", {
-          name: project.imageAlt,
-        });
-
-        expect(projectImages.length).toBeGreaterThan(0);
-        for (const image of projectImages) {
-          expect(image).toHaveAttribute("src", project.image);
-        }
-      }
-    },
-  );
-
-  it("gives every Business project card explicit mobile clearance", () => {
-    renderTemplate(businessTemplate);
-
-    for (const project of projects) {
-      expect(
-        screen.getByTestId(`business-case-label-${project.id}`),
-      ).toHaveAttribute("data-inline-clearance", "16px");
-    }
   });
 
   it.each([
@@ -430,28 +323,6 @@ describe("App smoke render", () => {
       );
       expect(document.getElementById("home")).toBeInTheDocument();
       expect(screen.queryByTestId("about-section")).not.toBeInTheDocument();
-    },
-  );
-
-  it.each([
-    ["engineering", engineeringTemplate, "navbar-link-journal"],
-    ["business", businessTemplate, "business-contents-link-journal"],
-  ] as const)(
-    "keeps the %s shell and journal context for local journal routes",
-    (templateId, template, journalLinkId) => {
-      window.history.pushState(null, "", journalPosts[0].href);
-
-      renderTemplate(template);
-
-      expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-        "data-template-id",
-        templateId,
-      );
-      expect(screen.getByTestId("journal-post-page")).toBeInTheDocument();
-      expect(screen.getByTestId(journalLinkId)).toHaveAttribute(
-        "aria-current",
-        "page",
-      );
     },
   );
 
@@ -546,20 +417,6 @@ describe("App smoke render", () => {
     expect(screen.getByTestId("projects-section")).toBeInTheDocument();
   });
 
-  it("preserves an open local journal post while changing styles", async () => {
-    window.history.pushState(null, "", journalPosts[0].href);
-
-    renderPortfolio();
-    await selectPortfolioStyle("engineering", "business");
-
-    expect(window.location.hash).toBe(journalPosts[0].href);
-    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
-      "data-template-id",
-      "business",
-    );
-    expect(screen.getByTestId("journal-post-page")).toBeInTheDocument();
-  });
-
   it("preserves a visitor-selected layout mode while changing styles", async () => {
     renderPortfolio();
 
@@ -587,5 +444,96 @@ describe("App smoke render", () => {
     expect(
       await screen.findByTestId("business-theme-toggle"),
     ).toBeInTheDocument();
+  });
+});
+
+describe("student portfolio actions", () => {
+  it.each(["#/journal/old-post", "#/gallery", "#/unknown", "#journal"])(
+    "recovers retired route %s",
+    (hash) => {
+      window.history.pushState(null, "", hash);
+      renderPortfolio();
+      expect(window.location.hash).toBe(
+        hash.startsWith("#/") ? "#/home" : "#home",
+      );
+      expect(document.getElementById("home")).toBeInTheDocument();
+      expect(document.getElementById("journal")).toBeNull();
+    },
+  );
+  it.each([
+    [engineeringTemplate, "hero", "navbar"],
+    [businessTemplate, "business-hero", "business"],
+  ] as const)(
+    "supports student actions in %s",
+    (template, prefix, controls) => {
+      renderTemplate(template);
+      expect(document.body.textContent).toContain("Trần Nguyên Vũ");
+      expect(screen.getByTestId(prefix + "-resume-download")).toHaveAttribute(
+        "href",
+        profile.resume.href,
+      );
+      expect(screen.getByTestId(prefix + "-resume-download")).toHaveAttribute(
+        "download",
+        "Tran-Nguyen-Vu-Resume.docx",
+      );
+      expect(screen.getByTestId("contact-submit")).toBeEnabled();
+      expect(screen.getByTestId("contact-name-input")).toBeEnabled();
+      expect(screen.getByTestId("contact-email-link")).toHaveAttribute(
+        "href",
+        "mailto:trannguyenvu0102@gmail.com",
+      );
+      expect(screen.getByTestId("contact-social-github")).toHaveAttribute(
+        "href",
+        "https://github.com/TranNguyenVu-code",
+      );
+      expect(
+        screen.queryByTestId("contact-email-placeholder"),
+      ).not.toBeInTheDocument();
+      expect(document.querySelector('a[href*="example.com"]')).toBeNull();
+      fireEvent.click(screen.getByTestId(controls + "-layout-toggle"));
+      fireEvent.click(screen.getByTestId(prefix + "-primary-action"));
+      expect(window.location.hash).toBe("#/projects");
+      expect(screen.getByTestId("projects-section")).toBeInTheDocument();
+      expect(screen.queryByTestId("home-section")).not.toBeInTheDocument();
+    },
+  );
+  it("gives direct anchors priority over a saved section layout", () => {
+    localStorage.setItem("portfolio-layout-mode", "multi");
+    window.history.replaceState(null, "", "#education");
+    renderPortfolio();
+    expect(screen.getByTestId("portfolio-main")).toHaveAttribute(
+      "data-layout-mode",
+      "single",
+    );
+    expect(screen.getByTestId("education-section")).toBeInTheDocument();
+    expect(screen.getByTestId("projects-section")).toBeInTheDocument();
+  });
+  it("keeps skip navigation within the current section route", () => {
+    window.history.replaceState(null, "", "#/projects");
+    renderPortfolio();
+    fireEvent.click(screen.getByText("Skip to portfolio content"));
+    expect(screen.getByTestId("portfolio-main")).toHaveFocus();
+    expect(window.location.hash).toBe("#/projects");
+  });
+  it("focuses the heading when a section action opens a page", async () => {
+    window.history.replaceState(null, "", "#/home");
+    renderPortfolio();
+    fireEvent.click(screen.getByTestId("hero-primary-action"));
+    await waitFor(() =>
+      expect(document.getElementById("projects-heading")).toHaveFocus(),
+    );
+    window.history.replaceState(null, "", "#/journal/removed");
+    fireEvent(window, new PopStateEvent("popstate"));
+    expect(window.location.hash).toBe("#/home");
+  });
+  it("updates sections when navigating browser history", () => {
+    window.history.pushState(null, "", "#/community");
+    renderPortfolio();
+    expect(screen.getByTestId("community-section")).toBeInTheDocument();
+    fireEvent(window, new PopStateEvent("popstate"));
+    window.history.replaceState(null, "", "#/education");
+    fireEvent(window, new PopStateEvent("popstate"));
+    expect(screen.getByTestId("education-section")).toBeInTheDocument();
+    expect(screen.queryByTestId("community-section")).not.toBeInTheDocument();
   });
 });

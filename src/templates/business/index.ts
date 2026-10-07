@@ -1,48 +1,41 @@
 import "./business.css";
-
+import BusinessHero from "../../templates/business/BusinessHero";
+import BusinessAbout from "../../templates/business/BusinessAbout";
+import BusinessEducation from "../../templates/business/BusinessEducation";
+import BusinessExperience from "../../templates/business/BusinessExperience";
+import BusinessProjects from "../../templates/business/BusinessProjects";
+import BusinessAwards from "../../templates/business/BusinessAwards";
+import BusinessSkills from "../../templates/business/BusinessSkills";
+import BusinessCommunity from "../../templates/business/BusinessCommunity";
+import BusinessContact from "../../templates/business/BusinessContact";
+import BusinessShell from "./BusinessShell";
 import { portfolioTemplateOptions } from "../options";
 import type { PortfolioTemplate } from "../types";
-import BusinessAbout from "./BusinessAbout";
-import BusinessAwards from "./BusinessAwards";
-import BusinessContact from "./BusinessContact";
-import BusinessEducation from "./BusinessEducation";
-import BusinessExperience from "./BusinessExperience";
-import BusinessGallery from "./BusinessGallery";
-import BusinessHero from "./BusinessHero";
-import BusinessJournal from "./BusinessJournal";
-import BusinessJournalPostPage from "./BusinessJournalPostPage";
-import BusinessProjects from "./BusinessProjects";
-import BusinessShell from "./BusinessShell";
-import BusinessSkills from "./BusinessSkills";
 
 export const businessChapterLabels = {
-  home: "Welcome",
-  about: "My Story",
+  home: "Home",
+  about: "About",
   education: "Education",
-  experience: "Experience",
-  awards: "Highlights",
-  projects: "Projects",
-  gallery: "Gallery",
-  journal: "Journal",
-  skills: "Skills",
-  contact: "Say Hello",
+  experience: "Analytics Experience",
+  projects: "Selected Projects",
+  awards: "Achievements",
+  skills: "Skills & Learning",
+  community: "Leadership & Community",
+  contact: "Contact",
 } satisfies PortfolioTemplate["chapterLabels"];
-
 export const businessTemplate = {
   ...portfolioTemplateOptions.business,
   ShellComponent: BusinessShell,
-  JournalPostComponent: BusinessJournalPostPage,
   chapterLabels: businessChapterLabels,
   sectionComponents: {
     home: BusinessHero,
     about: BusinessAbout,
     education: BusinessEducation,
     experience: BusinessExperience,
-    awards: BusinessAwards,
     projects: BusinessProjects,
-    gallery: BusinessGallery,
-    journal: BusinessJournal,
+    awards: BusinessAwards,
     skills: BusinessSkills,
+    community: BusinessCommunity,
     contact: BusinessContact,
   },
 } satisfies PortfolioTemplate;

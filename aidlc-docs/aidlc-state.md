@@ -2,73 +2,78 @@
 
 ## Active Workflow
 
-- **Project**: Brownfield React/Vite static portfolio
-- **Workspace**: `/Users/nhamhhung/nhamhung.github.io`
-- **Change**: Business Color and Two-Theme Refresh
-- **Current phase**: CONSTRUCTION
-- **Current stage**: Code Generation Part 2 - eighteen-step review gate
-- **Workflow status**: Active
-- **Active requirement questions**: `aidlc-docs/inception/requirements/business-youthful-color-refresh-requirement-questions.md`
-- **Active requirements**: `aidlc-docs/inception/requirements/business-youthful-color-refresh-requirements.md`
-- **Active execution plan**: `aidlc-docs/inception/plans/business-youthful-color-refresh-execution-plan.md`
-- **Active code-generation plan**: `aidlc-docs/construction/plans/business-youthful-color-refresh-code-generation-plan.md`
-- **Active approval question**: `aidlc-docs/construction/plans/business-youthful-color-refresh-step-18-approval-questions.md`
-- **Active code-generation summary**: `aidlc-docs/construction/business-youthful-color-refresh/code/code-generation-summary.md`
-- **Next action**: Await explicit Code Generation review before the final Build and Test rerun
+- Project: Tran Nguyen Vu — Student Analytics Portfolio Revamp
+- Workspace: `/Users/nhamhhung/nguyenvu.github.io`
+- Type: Brownfield React/TypeScript/Vite static portfolio
+- Current phase: COMPLETE
+- Current stage: Operations placeholder acknowledged — workflow complete
+- Status: Website revamp, light-theme correction, and supplied email/GitHub update complete and verified
+- Active plan: `aidlc-docs/construction/plans/student-analytics-portfolio-build-and-test-plan.md`
+- Execution plan: `aidlc-docs/inception/plans/execution-plan.md`
+- Active questions: `aidlc-docs/construction/build-and-test/review-questions.md`
+- Active requirements: `aidlc-docs/inception/requirements/requirements.md`
+- Active review: `aidlc-docs/construction/build-and-test/review-questions.md`
+- Active stories: `aidlc-docs/inception/user-stories/stories.md`
+- Active personas: `aidlc-docs/inception/user-stories/personas.md`
+- Source review: `aidlc-docs/inception/reverse-engineering/student-source-review.md`
+- Next step: None in the current AI-DLC workflow; website is ready for a separately requested deployment
 
-## Current Scope
+## Stage Progress
 
-- Apply the approved blue/mint/cream background palette and taupe/cream/orange text palette to Business.
-- Preserve Business layout, typography, content, routes, interactions, responsive behavior, and certificate previews.
-- Support exactly Engineering and Business across types, registry, selector, persistence, routes, and tests.
-- Remove the retired theme implementation and all non-audit documentation references.
-- Preserve the append-only audit as the required immutable historical record.
-- Make the Business contact email smaller, fully visible, and clearly bordered.
-- Remove the Business video and certificate sequence labels.
-- Brighten dark-mode supporting text toward the approved cream palette.
-- Remove all decorative Business sequence numbering while preserving meaningful numeric content.
-- Replace all three project-cover imports with the supplied PNG assets and accurate alternative text.
-- Keep the supplied PNGs unchanged and display their cover crop from the left edge.
-- Add consistent horizontal padding to Business left-rail navigation labels.
-- Center the bordered Business contact email within its card.
-- Reduce and center the displayed Business profile record without changing the source portrait.
-- Center all Direct Contact card content for optical balance.
-- Reduce the profile record to `20rem` and shorten the portrait frame to `4 / 3`.
-- Lengthen the compact portrait frame slightly to `4 / 3.5`.
-- Add highlighted surfaces and hover feedback to the contact email and three social links.
-- Rewrite the README for a reader making their first-ever VS Code, Git, npm, GitHub Actions, and GitHub Pages contribution.
-- Normalize the Direct Contact card's blue, cream, and mint color roles across light and dark modes.
-- Match the Direct Contact card to the Send message button's background and text colors while retaining readable highlighted email and social controls.
-- Reorder the README into the requested template-first GitHub Pages, trusted instructor collaboration, local-editing, first-push, and deployment-verification journey.
+- [x] Workspace Detection
+- [x] Reverse Engineering — refreshed current architecture and source findings
+- [x] Reverse Engineering approval — user: "approve and continue"
+- [x] Requirements Analysis — answers validated and requirements generated
+- [x] Requirements document approval — user: "approve and continue"
+- [x] User Stories assessment — execute at concise depth
+- [x] User Stories Part 1 — plan prepared
+- [x] User Stories plan approval — user: "approve and continue"
+- [x] User Stories Part 2 — generation and verification
+- [x] Generated stories/personas approval — user: "approve and continue"
+- [x] Workflow Planning — plan prepared
+- [x] Execution-plan approval — user: "approve and continue"
+- [x] Conditional design-stage assessment — one frontend unit
+- [x] Application Design — SKIP (existing component boundaries)
+- [x] Units Planning/Generation — SKIP (single frontend unit)
+- [x] Functional Design — SKIP (simple display logic)
+- [x] NFR Requirements — artifacts generated (minimal)
+- [x] NFR Requirements artifact approval — user: "approve and continue"
+- [x] NFR Design — artifacts generated (minimal)
+- [x] NFR Design artifact approval — user: "approve"
+- [x] Infrastructure Design — SKIP (hosting unchanged)
+- [x] Code Generation Part 1 — plan prepared
+- [x] Code Generation plan approval — user: "approve and continue"
+- [x] Code Generation implementation
+- [x] Code Generation completion review approval — user: "approve and continue"
+- [x] Build and Test — instructions and evidence summary complete
+- [x] Build and Test review approval — user: "approve and continue"
+- [x] Operations — placeholder acknowledged; no deployment/monitoring tasks defined
 
 ## Extension Configuration
 
-| Extension              | Enabled | Decision                                              |
-| ---------------------- | ------- | ----------------------------------------------------- |
-| Security Baseline      | No      | Business Youthful Color Refresh Requirements Analysis |
-| Property-Based Testing | No      | Business Youthful Color Refresh Requirements Analysis |
+| Extension | Enabled | Decision |
+| --- | --- | --- |
+| Security Baseline | No | Requirements Analysis: Question 3 answer B |
+| Property-Based Testing | No | Requirements Analysis: Question 4 answer C |
 
-## Active Stage Progress
+Both lightweight opt-in prompts loaded. Full rules not loaded. No extension without an opt-in file found. Disabled enforcement skipped and recorded in audit. Security and PBT rules are N/A because explicitly disabled by this workflow’s answers. No full extension rule files loaded.
 
-### Business Color and Two-Theme Refresh
+## Source and Implementation Boundaries
 
-- [x] Workspace Detection - Brownfield React/Vite workspace and isolated Business style boundary confirmed on 2026-08-25
-- [x] Requirements Analysis - Background palette, text palette, layout preservation, and complete theme-removal requirements approved on 2026-08-25
-- [x] Workflow Planning - Focused execution plan approved on 2026-08-25
-- [x] Code Generation Part 1 - All eighteen steps approved
-- [x] Code Generation Part 2 - All eighteen approved steps implemented and verified
-- [ ] Build and Test - Final eighteen-step rerun required after Code Generation approval
-- [ ] Operations - Placeholder
+- Both source DOCX files are untracked user inputs; preserve them.
+- Resume email/phone/GPA and project/profile links are missing. User requested placeholder contact values; use clearly marked placeholders and inactive actions. Omit blank GPA and unsupported evidence links.
+- Internship dates resolved by answer A: 1 June–31 August 2026 from the company report.
+- Application code remains at workspace root; workflow documentation under aidlc-docs.
+- Application/content/theme and obsolete assets updated under the approved plan. Dependencies and deployment configuration unchanged.
 
-## Reused Foundation
+## Prior Workflow
 
-- App owns browser hash, active section, journal route, runtime template selection, and layout state.
-- Template definitions provide shells, journals, chapter labels, and section maps.
-- Shared data, components, routes, layout modes, color mode, and GitHub Pages behavior remain authoritative.
+The inherited Business Color and Two-Theme Refresh was awaiting Code Generation review. Its history and approvals remain in append-only audit.md and prior stage artifacts. This new request starts a distinct workflow and does not infer new approvals from the prior owner's workflow.
 
-## Documentation Controls
+## Latest review correction
 
-- Active index: `aidlc-docs/README.md`.
-- Update active artifacts instead of creating duplicate revisions.
-- Keep application code at the workspace root and documentation under `aidlc-docs/`.
-- Keep `audit.md` append-only and complete.
+Light readability requested and completed: darker light-mode text, stronger borders, and larger small labels across both styles. Contrast tests, lint, production build, and responsive browser checks passed. See construction/plans/light-readability-correction-plan.md and the updated build-and-test summary. Dark palette and behavior preserved.
+
+## Contact configuration follow-up
+
+User supplied trannguyenvu0102@gmail.com and https://github.com/TranNguyenVu-code. Updated shared profile and removed its contact placeholder status. Both styles show the live email/GitHub links and enable the existing email-draft form. No LinkedIn account invented. Verified 36 focused tests, lint, and production build. Earlier placeholder requirements describe the initial source state and are superseded by this explicit user update. Both DOCX inputs remain unchanged; no publication or email transmission performed.

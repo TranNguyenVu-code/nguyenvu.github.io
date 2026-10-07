@@ -1,7 +1,7 @@
-import { Box } from '@chakra-ui/react'
+import { Box } from "@chakra-ui/react";
 
-import Navbar from '../../components/Navbar'
-import type { PortfolioShellProps } from '../types'
+import Navbar from "../../components/Navbar";
+import type { PortfolioShellProps } from "../types";
 
 function EngineeringShell({
   activeSection,
@@ -21,6 +21,16 @@ function EngineeringShell({
       className="portfolio-template portfolio-template-engineering"
       data-template-id="engineering"
     >
+      <a
+        className="skip-link"
+        href="#portfolio-main"
+        onClick={(event) => {
+          event.preventDefault();
+          document.getElementById("portfolio-main")?.focus();
+        }}
+      >
+        Skip to portfolio content
+      </a>
       <Navbar
         activeSection={activeSection}
         activeTemplateId={activeTemplateId}
@@ -36,7 +46,7 @@ function EngineeringShell({
         w="100%"
         p={0}
         m={0}
-        pt={layoutMode === 'multi' ? { base: '68px', md: '76px' } : 0}
+        id="portfolio-main"
         data-layout-mode={layoutMode}
         data-template-id="engineering"
         data-testid="portfolio-main"
@@ -45,7 +55,7 @@ function EngineeringShell({
         {children}
       </Box>
     </Box>
-  )
+  );
 }
 
-export default EngineeringShell
+export default EngineeringShell;
