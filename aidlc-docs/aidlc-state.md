@@ -16,7 +16,7 @@
 - Active stories: `aidlc-docs/inception/user-stories/stories.md`
 - Active personas: `aidlc-docs/inception/user-stories/personas.md`
 - Source review: `aidlc-docs/inception/reverse-engineering/student-source-review.md`
-- Next step: None in the current AI-DLC workflow; website is ready for a separately requested deployment
+- Next step: None in the current AI-DLC workflow; latest user-pushed website deployment recovered successfully
 
 ## Stage Progress
 
@@ -77,3 +77,11 @@ Light readability requested and completed: darker light-mode text, stronger bord
 ## Contact configuration follow-up
 
 User supplied trannguyenvu0102@gmail.com and https://github.com/TranNguyenVu-code. Updated shared profile and removed its contact placeholder status. Both styles show the live email/GitHub links and enable the existing email-draft form. No LinkedIn account invented. Verified 36 focused tests, lint, and production build. Earlier placeholder requirements describe the initial source state and are superseded by this explicit user update. Both DOCX inputs remain unchanged; no publication or email transmission performed.
+
+## Latest deployment recovery
+
+User requested investigating the failed GitHub run. Run 37642287945 attempt 1 built successfully but hit GitHub's workflow-level internal server error before deploy. Full rerun attempt 2 succeeded for the same commit 5408877; build and deploy passed, and published HTML/current contact bundle were verified. Investigation: operations/latest-deployment-investigation.md. No source or workflow change required.
+
+## Dark default follow-up
+
+User requested dark mode as the default. Shared next-themes provider now defaults to dark for visitors without a saved selection; existing preferences and toggles remain available in both styles. Verified 31 App tests, lint, and production build. This latest local change has not been committed or published by the agent.

@@ -9677,3 +9677,57 @@ X) Other (describe after [Answer]:).
 **Context**: 36 focused tests across 3 files passed; ESLint/build successful; plan checkboxes complete and state/handoff/summary updated. No email sent, commit/push/publication performed, or source DOCX altered. Security/PBT extensions N/A (disabled), enforcement skipped. Markdown validated; audit append-only.
 
 ---
+
+## Latest Deployment Investigation
+
+**Timestamp**: 2026-10-07T15:29:37Z
+**User Input**: "latest deployment is failing on github, please check"
+**AI Response**: "I’ll inspect the latest GitHub Actions run, identify the failing step, and fix the deployment issue."
+**Context**: Run 37642287945 build/upload success; workflow-level internal server error prevented deploy job. Correlation ID fade8751-5223-4f0c-917b-74b122b41e14. Environment allows main; no app or workflow fix indicated. Retrying failed deployment of same user-pushed commit. No unrelated settings changed. Disabled extensions skipped. Markdown validated; audit append-only.
+
+---
+
+## Latest Deployment Recovery - Completion
+
+**Timestamp**: 2026-10-07T15:31:54Z
+**User Input**: "N/A"
+**AI Response**: "The website build and artifact upload succeeded. The failure happened before the deployment job started, so I’m checking GitHub’s environment restrictions and deployment checks. GitHub reports an Internal server error; I retried the same user-pushed commit. The retry succeeded: build and deployment passed. Live HTML and published contact details were verified."
+**Context**: Failed-job rerun was rejected because no failed deploy job existed; full rerun accepted. Run 37642287945 attempt 2 success, build 28s/deploy 17s. Published site https://trannguyenvu-code.github.io/nguyenvu.github.io/. No app/workflow/policy changes or new commit/push. Existing action runtime warnings non-blocking. Plan/state updated. Markdown validated; disabled extensions N/A and enforcement skipped; audit appended only.
+
+---
+
+## Dark Mode Default - Request
+
+**Timestamp**: 2026-10-07T16:03:54Z
+**User Input**: "set the default mode as dark mode"
+**AI Response**: "I’ll make dark mode the default for new visitors while keeping their saved theme preference."
+**Context**: Authorized follow-up to completed website. Shared provider default dark; stored preferences retain precedence. Existing integration assertion updated; no new implementation-mirroring test added. Audit appended only; disabled extension enforcement skipped.
+
+---
+
+## Dark Mode Default - Completion
+
+**Timestamp**: 2026-10-07T16:04:13Z
+**User Input**: "N/A"
+**AI Response**: "Dark mode is now the default for new visitors. Saved preferences and the light/dark toggle still work. All 31 App tests, lint, and the build pass."
+**Context**: Shared defaultTheme changed to dark; initial dark and switched light context verified by existing integration test. Plan checkboxes and state updated. No commit/push/publication performed; existing bundle warning non-blocking. Disabled extensions skipped; audit append-only.
+
+---
+
+## Deployment Status Question
+
+**Timestamp**: 2026-10-07T16:06:07Z
+**User Input**: "has it been deployed?"
+**AI Response**: "Not yet. The dark-mode default change is still local and uncommitted. The live site is running the previous successful deployment."
+**Context**: Read-only verification: latest successful GitHub run 37642287945 at commit 5408877; local provider still differs from that commit. No commit/push/deployment authorized or performed by this status question. Audit appended only.
+
+---
+
+## Dark Default Deployment - Authorization
+
+**Timestamp**: 2026-10-07T16:07:07Z
+**User Input**: "please deploy it as well"
+**AI Response**: "I’ll commit and push the verified dark-mode change, monitor GitHub Pages, and confirm the live site uses dark mode by default."
+**Context**: Explicit publication authorized. Reviewed provider default and existing color integration assertion; current checks pass. Fetched origin; main matches remote. Deployment follows existing GitHub Pages workflow. Local operations rule is a placeholder and imposes no extra executable gate. Disabled extensions skipped; Markdown validated; audit appended only.
+
+---
